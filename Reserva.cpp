@@ -40,7 +40,7 @@ void Reserva::setLocalidade(string localidade)
     this->localidade = localidade; 
 }
 
-string Reserva::getCheckIn()
+string Reserva::getCheckIn() const
 { 
     return checkIn; 
 }
@@ -97,4 +97,34 @@ bool Reserva::getStatusReserva()
 void Reserva::setStatusReserva(bool statusReserva) 
 { 
     this->statusReserva = statusReserva; 
+}
+
+Reserva::Reserva() : numeroDiarias(0), valorTotal(0.0f), valorEntrada(0.0f), statusReserva(false) {}
+
+Reserva::Reserva(Cliente cliente, Atendente atendente, Quarto quarto, string localidade, string checkIn, int numeroDiarias)
+    : cliente(cliente), atendente(atendente), quarto(quarto),
+      localidade(localidade), checkIn(checkIn), numeroDiarias(numeroDiarias),
+      valorTotal(0.0f), valorEntrada(0.0f), statusReserva(false) {}
+
+float Reserva::calcularValores()
+{
+    float valorDiaria = 0.0f;
+    if (quarto.getTipoQuarto() == "Solteiro") valorDiaria = 200.0f;
+    else if (quarto.getTipoQuarto() == "Duplo") valorDiaria = 300.0f;
+    else if (quarto.getTipoQuarto() == "Casal") valorDiaria = 350.0f;
+    else if (quarto.getTipoQuarto() == "Triplo") valorDiaria = 450.0f;
+    else if (quarto.getTipoQuarto() == "Quadruplo") valorDiaria = 550.0f;
+
+    float valorBruto = valorDiaria * numeroDiarias;
+    valorTotal = (estrategiaDesconto != nullptr)
+                 ? estrategiaDesconto->calcularValorFinal(valorBruto)
+                 : valorBruto;
+
+    valorEntrada = valorTotal / 3.0f;
+    return valorTotal;
+}
+
+void Reserva::confirmarPagamento()
+{
+    this->statusReserva = true;
 }

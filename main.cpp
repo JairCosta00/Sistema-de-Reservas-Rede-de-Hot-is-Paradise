@@ -4,7 +4,7 @@
 #include <vector>
 #include <fstream>  // biblioteca necessária para usar a manipulação de ficheiros (ofstream)
 #include <algorithm>    // biblioteca necessária para ordenar as reservas no arquivo (std::sort)
-
+#include <limits>
 #include "Atendente.h"
 #include "Cliente.h"
 #include "EstrategiaDesconto.h"
@@ -12,7 +12,7 @@
 #include "Reserva.h"
 
 // comando de compilação:
-// ----> clang++ main.cpp Atendente.cpp Cliente.cpp EstrategiaDesconto.cpp Quarto.cpp Reserva.cpp -o HotelSystem
+// ----> clang++ main.cpp Atendente.cpp Cliente.cpp Quarto.cpp Reserva.cpp -o HotelSystem
 // ----> após, executar: ./HotelSystem
 
 using namespace std;

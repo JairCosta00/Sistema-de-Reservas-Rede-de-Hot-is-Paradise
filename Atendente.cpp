@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include "Atendente.h"
 
 using namespace std;
@@ -41,4 +42,17 @@ bool Atendente::getAutenticado()
 void Atendente::setAutenticado(bool autenticado)
 {
     this->autenticado = autenticado;
+}
+
+Atendente::Atendente() : autenticado(false) {}
+
+Atendente::Atendente(string nome, string login, string senha)
+    : nome(nome), login(login), senha(senha), autenticado(false) {}
+
+void Atendente::autenticar(string senhaDigitada)
+{
+    if (this->senha != senhaDigitada) {
+        throw std::runtime_error("Login / Senha invalido.");
+    }
+    this->autenticado = true;
 }

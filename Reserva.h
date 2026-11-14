@@ -47,7 +47,7 @@ class Reserva
 
         void setLocalidade(string localidade);
 
-        string getCheckIn();
+        string getCheckIn() const;
 
         void setcheckIn(string checkIn);
 

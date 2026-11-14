@@ -1,5 +1,5 @@
-#ifndef ATENDENTE_H
-#define ATENDENTE_H
+#ifndef QUARTO_H
+#define QUARTO_H
 
 #include <string>
 using namespace std;
