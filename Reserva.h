@@ -1,6 +1,7 @@
 #ifndef RESERVA_H
 #define RESERVA_H
 
+#include <memory>
 #include "Quarto.h"
 #include "Cliente.h"
 #include "Atendente.h"
