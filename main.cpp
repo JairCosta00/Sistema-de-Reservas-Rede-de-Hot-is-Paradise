@@ -11,6 +11,9 @@
 #include "Quarto.h"
 #include "Reserva.h"
 
+// comando de compilação:
+// ----> clang++ main.cpp Atendente.cpp Cliente.cpp EstrategiaDesconto.cpp Quarto.cpp Reserva.cpp -o HotelSystem
+// ----> após, executar: ./HotelSystem
 
 using namespace std;
 
