@@ -15,7 +15,7 @@ class Quarto
         Quarto(string tipo, float diaria);
         // ~Quarto();
 
-        string getTipoQuarto();
+        string getTipoQuarto() const;
         
         void setTipoQuarto(string tipoQuarto);
 };

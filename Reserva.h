@@ -32,19 +32,19 @@ class Reserva
         void confirmarPagamento();
 
     // ------------------------ GETTERS AND SETTERS ------------------------
-        Cliente getCliente();
+        Cliente getCliente() const;
 
         void setCliente(const Cliente& cliente);
 
-        Atendente getAtendente();
+        Atendente getAtendente() const;
 
         void setAtendente(Atendente atendente);
 
-        Quarto getQuarto();
+        Quarto getQuarto() const;
 
         void setQuarto(Quarto quarto);
 
-        string getLocalidade();
+        string getLocalidade() const;
 
         void setLocalidade(string localidade);
 
@@ -52,23 +52,23 @@ class Reserva
 
         void setcheckIn(string checkIn);
 
-        int getNumeroDiarias();
+        int getNumeroDiarias() const;
 
         void setNumeroDiarias(int numeroDiarias);
 
-        std::shared_ptr<EstrategiaDesconto> getEstrategiaDesconto();
+        std::shared_ptr<EstrategiaDesconto> getEstrategiaDesconto() const;
 
         void setEstrategiaDesconto(std::shared_ptr<EstrategiaDesconto> estrategiaDesconto);
 
-        float getValorTotal();
+        float getValorTotal() const;
 
         void setValorTotal(float valorTotal);
 
-        float getValorEntrada();
+        float getValorEntrada() const;
 
         void setValorEntrada(float valorEntrada);
 
-        bool getStatusReserva();
+        bool getStatusReserva() const;
 
         void setStatusReserva(bool statusReserva);
 };

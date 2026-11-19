@@ -12,17 +12,17 @@ Cliente::Cliente(string nome, string cpf)
     this->cpf = cpf;
 }
 
-string Cliente::getNome()
+string Cliente::getNome() const
 {
     return nome;
 }
 
-void Cliente::setNome(string nome) 
+void Cliente::setNome(string nome)
 {
     this->nome = nome;
 }
 
-string Cliente::getCpf() 
+string Cliente::getCpf() const
 {
     return cpf;
 }

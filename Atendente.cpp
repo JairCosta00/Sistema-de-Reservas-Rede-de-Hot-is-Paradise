@@ -4,7 +4,7 @@
 
 using namespace std;
 
-string Atendente::getNome() 
+string Atendente::getNome() const
 {
     return nome;
 }
@@ -14,7 +14,7 @@ void Atendente::setNome(string nome)
     this->nome = nome;
 }
 
-string Atendente::getSenha()
+string Atendente::getSenha() const
 {
     return senha;
 }
@@ -24,7 +24,7 @@ void Atendente::setSenha(string senha)
     this->senha = senha;
 }
 
-string Atendente::getLogin()
+string Atendente::getLogin() const
 {
     return login;
 }
@@ -34,7 +34,7 @@ void Atendente::setLogin(string login)
     this->login = login;
 }
 
-bool Atendente::getAutenticado()
+bool Atendente::getAutenticado() const
 {
     return autenticado;
 }

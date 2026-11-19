@@ -19,19 +19,19 @@ class Atendente
         // ~Atendente();
         void autenticar(string senhaDigitada);
 
-        string getNome();
+        string getNome() const;
 
         void setNome(string nome);
 
-        string getSenha();
+        string getSenha() const;
 
         void setSenha(string senha);
 
-        string getLogin();
+        string getLogin() const;
 
         void setLogin(string login);
 
-        bool getAutenticado();
+        bool getAutenticado() const;
 
         void setAutenticado(bool autenticado);
 };

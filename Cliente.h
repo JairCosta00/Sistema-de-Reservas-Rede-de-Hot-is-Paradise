@@ -16,11 +16,11 @@ class Cliente
         Cliente(string nome, string cpf);
         // ~Cliente();
 
-        string getNome();
+        string getNome() const;
         
         void setNome(string nome);
 
-        string getCpf();
+        string getCpf() const;
         
         void setCpf(string cpf);
 };

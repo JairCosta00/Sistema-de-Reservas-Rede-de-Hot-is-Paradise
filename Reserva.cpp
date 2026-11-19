@@ -1,6 +1,6 @@
 #include "Reserva.h"
 
-Cliente Reserva::getCliente() 
+Cliente Reserva::getCliente() const
 {
     return cliente; 
 }
@@ -10,7 +10,7 @@ void Reserva::setCliente(const Cliente& cliente)
     this->cliente = cliente; 
 }
 
-Atendente Reserva::getAtendente() 
+Atendente Reserva::getAtendente() const
 { 
     return atendente; 
 }
@@ -20,7 +20,7 @@ void Reserva::setAtendente(Atendente atendente)
     this->atendente = atendente; 
 }
 
-Quarto Reserva::getQuarto() 
+Quarto Reserva::getQuarto() const
 {
     return quarto;
 }
@@ -30,7 +30,7 @@ void Reserva::setQuarto(Quarto quarto)
     this->quarto = quarto;
 }
 
-string Reserva::getLocalidade() 
+string Reserva::getLocalidade() const
 { 
     return localidade; 
 }
@@ -50,7 +50,7 @@ void Reserva::setcheckIn(string checkIn)
     this->checkIn = checkIn; 
 }
 
-int Reserva::getNumeroDiarias()
+int Reserva::getNumeroDiarias() const
 { 
     return numeroDiarias; 
 }
@@ -60,7 +60,7 @@ void Reserva::setNumeroDiarias(int numeroDiarias)
     this->numeroDiarias = numeroDiarias; 
 }
 
-std::shared_ptr<EstrategiaDesconto> Reserva::getEstrategiaDesconto() 
+std::shared_ptr<EstrategiaDesconto> Reserva::getEstrategiaDesconto() const
 {
     return estrategiaDesconto;
 }
@@ -70,7 +70,7 @@ void Reserva::setEstrategiaDesconto(std::shared_ptr<EstrategiaDesconto> estrateg
     this->estrategiaDesconto = estrategiaDesconto;
 }
 
-float Reserva::getValorTotal() 
+float Reserva::getValorTotal() const
 { 
     return valorTotal; 
 }
@@ -79,7 +79,7 @@ void Reserva::setValorTotal(float valorTotal)
     this->valorTotal = valorTotal; 
 }
 
-float Reserva::getValorEntrada() 
+float Reserva::getValorEntrada() const
 { 
     return valorEntrada; 
 }
@@ -89,7 +89,7 @@ void Reserva::setValorEntrada(float valorEntrada)
     this->valorEntrada = valorEntrada; 
 }
 
-bool Reserva::getStatusReserva() 
+bool Reserva::getStatusReserva() const
 { 
     return statusReserva; 
 }

@@ -20,7 +20,7 @@ Quarto::Quarto(string tipoQuarto, float diaria)
     this->diaria = diaria;
 }
 
-string Quarto::getTipoQuarto()
+string Quarto::getTipoQuarto() const
 {
     return tipoQuarto;
 }
