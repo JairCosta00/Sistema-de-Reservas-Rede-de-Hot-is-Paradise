@@ -1,0 +1,9 @@
+# Pastas de build e arquivos locais do Qt Creator
+build/
+CMakeLists.txt.user*
+*.autosave
+
+# Arquivos do sistema macOS e executáveis antigos
+.DS_Store
+HotelSystem
+*.o
