@@ -13,6 +13,19 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+
+    Atendente* atendente =
+        GerenciadorDeReservas::getInstancia()
+            ->getAtendenteLogado();
+
+    if (atendente != nullptr) {
+        ui->labelAtendente->setText(
+            "Atendente: " +
+            QString::fromStdString(atendente->getNome())
+            );
+    }
+
+
     // Botão Sair do Sistema
     connect(ui->btnSair, &QPushButton::clicked,
             this, [this]() {
