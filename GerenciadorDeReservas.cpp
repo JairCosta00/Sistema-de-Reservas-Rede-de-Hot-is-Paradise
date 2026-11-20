@@ -14,7 +14,7 @@ GerenciadorDeReservas::GerenciadorDeReservas()
         Atendente("Ana", "atendente1", "senha1"),
         Atendente("Bruno", "atendente2", "senha2"),
         Atendente("Carlos", "atendente3", "senha3"),
-        Atendente("Diana", "atendente4", "senha4")
+        Atendente("Diana", "a", "a")
     };
 }
 
