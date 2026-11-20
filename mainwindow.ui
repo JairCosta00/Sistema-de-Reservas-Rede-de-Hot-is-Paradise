@@ -6,21 +6,275 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1325</width>
+    <height>612</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>20</y>
+      <width>601</width>
+      <height>451</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QFrame" name="frameFundoEscuro">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+QFrame#frameFundoEscuro {
+    background-color: #101C30;
+    border: none;
+}
+
+QLabel {
+    background: transparent;
+    border: none;
+}
+
+/* Nome do hotel */
+QLabel#labelMarca {
+    color: #D6B878;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* Título */
+QLabel#labelTitulo {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* Atendente */
+QLabel#labelAtendente {
+    color: #CBD5E1;
+    font-size: 17px;
+}
+
+/* Rodapé */
+QLabel#labelRodape {
+    color: #94A3B8;
+    font-size: 11px;
+}
+
+/* Configuração de todos os botões */
+QPushButton {
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 0px 12px;
+}
+
+/* Consultar disponibilidade */
+QPushButton#btnConsultarReserva {
+    background-color: #2563EB;
+    border: 1px solid #3B82F6;
+}
+
+QPushButton#btnConsultarReserva:hover {
+    background-color: #3B82F6;
+}
+
+/* Listar reservas */
+QPushButton#btnListarReservas {
+    background-color: rgba(255, 255, 255, 18);
+    border: 1px solid #64748B;
+}
+
+QPushButton#btnListarReservas:hover {
+    background-color: rgba(255, 255, 255, 45);
+}
+
+/* Sair */
+QPushButton#btnSair {
+    background-color: rgba(127, 29, 29, 50);
+    border: 1px solid #EF4444;
+}
+
+QPushButton#btnSair:hover {
+    background-color: #DC2626;
+}
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="labelTitulo">
+          <property name="font">
+           <font>
+            <pointsize>-1</pointsize>
+            <bold>true</bold>
+            <stylestrategy>PreferDefault</stylestrategy>
+           </font>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LayoutDirection::LeftToRight</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+QLabel#labelAtendente {
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    background: transparent;
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Menu Principal</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelAtendente">
+          <property name="styleSheet">
+           <string notr="true">
+QLabel#labelTitulo {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    background: transparent;
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Atendente: Ana</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnConsultarReserva">
+          <property name="styleSheet">
+           <string notr="true">
+QPushButton {
+    background-color: #2563EB;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #1D4ED8;
+}
+
+QPushButton:pressed {
+    background-color: #1E40AF;
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Consultar disponibilidade / Realizar reserva</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+QPushButton {
+    background-color: #2563EB;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #1D4ED8;
+}
+
+QPushButton:pressed {
+    background-color: #1E40AF;
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Listar reservas</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnSair">
+          <property name="styleSheet">
+           <string notr="true">
+QPushButton {
+    background-color: #2563EB;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #1D4ED8;
+}
+
+QPushButton:pressed {
+    background-color: #1E40AF;
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Sair do sistema</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>24</height>
+     <width>1325</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
