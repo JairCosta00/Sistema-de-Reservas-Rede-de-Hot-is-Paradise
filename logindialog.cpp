@@ -11,6 +11,13 @@ LoginDialog::LoginDialog(QWidget *parent)
 
     // Garante que a senha comece oculta
     ui->lineEditSenha->setEchoMode(QLineEdit::Password);
+
+    // acabamento visual e de usabilidade:
+    ui->lineEditLogin->setClearButtonEnabled(true);
+    ui->pushButtonEntrar->setCursor(Qt::PointingHandCursor);
+    ui->checkBoxMostrarSenha->setCursor(Qt::PointingHandCursor);
+    ui->labelTelaNomeHotel->setAlignment(Qt::AlignCenter);
+    ui->labelTituloEVersao->setAlignment(Qt::AlignCenter);
 }
 
 LoginDialog::~LoginDialog()
