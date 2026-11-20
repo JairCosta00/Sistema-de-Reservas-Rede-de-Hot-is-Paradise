@@ -58,7 +58,7 @@
     <property name="styleSheet">
      <string notr="true">
 QFrame#frameFundoEscuro {
-    background-color: #101C30;
+    background-color: #FFFFFF;
     border: none;
 }
 
@@ -69,7 +69,7 @@ QLabel {
 
 /* Nome do hotel */
 QLabel#labelMarca {
-    color: #D6B878;
+    color: #B8863B;
     font-size: 13px;
     font-weight: bold;
     letter-spacing: 2px;
@@ -77,26 +77,26 @@ QLabel#labelMarca {
 
 /* Título */
 QLabel#labelTitulo {
-    color: white;
+    color: #1F2937;
     font-size: 32px;
     font-weight: bold;
 }
 
 /* Atendente */
 QLabel#labelAtendente {
-    color: #CBD5E1;
+    color: #475569;
     font-size: 17px;
 }
 
 /* Rodapé */
 QLabel#labelRodape {
-    color: #94A3B8;
+    color: #64748B;
     font-size: 11px;
 }
 
 /* Configuração de todos os botões */
 QPushButton {
-    color: white;
+    color: #1F2937;
     font-size: 14px;
     font-weight: bold;
     border-radius: 12px;
@@ -105,32 +105,41 @@ QPushButton {
 
 /* Consultar disponibilidade */
 QPushButton#btnConsultarReserva {
-    background-color: #2563EB;
-    border: 1px solid #3B82F6;
+    background-color: #FFFFFF;
+    border: 1px solid #94A3B8;
 }
 
 QPushButton#btnConsultarReserva:hover {
-    background-color: #3B82F6;
+    background-color: #F1F5F9;
+    border: 1px solid #64748B;
 }
 
 /* Listar reservas */
 QPushButton#btnListarReservas {
-    background-color: rgba(255, 255, 255, 18);
-    border: 1px solid #64748B;
+    background-color: #FFFFFF;
+    border: 1px solid #94A3B8;
 }
 
 QPushButton#btnListarReservas:hover {
-    background-color: rgba(255, 255, 255, 45);
+    background-color: #F1F5F9;
+    border: 1px solid #64748B;
 }
 
 /* Sair */
 QPushButton#btnSair {
-    background-color: rgba(127, 29, 29, 50);
+    color: #B91C1C;
+    background-color: #FEF2F2;
     border: 1px solid #EF4444;
 }
 
 QPushButton#btnSair:hover {
+    color: #FFFFFF;
     background-color: #DC2626;
+}
+
+/* Efeito ao clicar */
+QPushButton:pressed {
+    background-color: #E2E8F0;
 }
 </string>
     </property>
