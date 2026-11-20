@@ -32,6 +32,9 @@ set(PROJECT_SOURCES
         GerenciadorDeReservas.h
         GerenciadorDeReservas.cpp
         EstrategiaDesconto.h
+        logindialog.h
+        logindialog.cpp
+        logindialog.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
