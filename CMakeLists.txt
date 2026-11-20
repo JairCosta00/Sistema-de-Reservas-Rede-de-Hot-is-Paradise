@@ -35,6 +35,12 @@ set(PROJECT_SOURCES
         logindialog.h
         logindialog.cpp
         logindialog.ui
+        teladisponibilidade.cpp
+        teladisponibilidade.h
+        teladisponibilidade.ui
+        telalistagem.cpp
+        telalistagem.h
+        telalistagem.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -42,6 +48,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         resources.qrc
+        teladisponibilidade.h teladisponibilidade.cpp teladisponibilidade.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET HotelSystem APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

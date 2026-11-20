@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TelaDisponibilidade</class>
+ <widget class="QDialog" name="TelaDisponibilidade">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>1100</width><height>720</height></rect>
+  </property>
+  <property name="minimumSize">
+   <size><width>560</width><height>620</height></size>
+  </property>
+  <property name="windowTitle"><string>Hotel Paradise - Disponibilidade</string></property>
+  <property name="styleSheet">
+   <string notr="true">QDialog#TelaDisponibilidade {
+    background-color: #F8FAFC;
+}
+QFrame#cardConsulta {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+}
+QLabel {
+    background: transparent;
+    border: none;
+    color: #1F2937;
+}
+QLabel#labelMarca {
+    color: #B8863B;
+    font-size: 12px;
+    font-weight: bold;
+}
+QLabel#labelTitulo {
+    font-size: 29px;
+    font-weight: bold;
+    color: #111827;
+}
+QLabel#labelDescricao {
+    color: #64748B;
+    font-size: 13px;
+}
+QLabel#labelHotel, QLabel#labelData, QLabel#labelQuarto {
+    font-size: 13px;
+    font-weight: bold;
+    color: #334155;
+}
+QLabel#labelResultado {
+    color: #64748B;
+    background-color: #F1F5F9;
+    border-radius: 8px;
+    padding: 13px;
+    font-size: 13px;
+}
+QComboBox, QDateEdit {
+    background-color: #FFFFFF;
+    color: #1F2937;
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+    padding: 8px 12px;
+    min-height: 30px;
+    font-size: 13px;
+}
+QComboBox:hover, QDateEdit:hover {
+    border: 1px solid #64748B;
+}
+QComboBox:focus, QDateEdit:focus {
+    border: 1px solid #2563EB;
+}
+QComboBox QAbstractItemView {
+    background: white;
+    color: #1F2937;
+    selection-background-color: #DBEAFE;
+    selection-color: #1E3A8A;
+}
+QPushButton {
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 9px;
+    padding: 10px 18px;
+}
+QPushButton#btnConsultar {
+    background-color: #2563EB;
+    color: #FFFFFF;
+    border: 1px solid #2563EB;
+}
+QPushButton#btnConsultar:hover {
+    background-color: #1D4ED8;
+    border-color: #1D4ED8;
+}
+QPushButton#btnVoltar {
+    background-color: #FFFFFF;
+    color: #334155;
+    border: 1px solid #CBD5E1;
+}
+QPushButton#btnVoltar:hover {
+    background-color: #F1F5F9;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="layoutPrincipal">
+   <property name="spacing"><number>8</number></property>
+   <property name="leftMargin"><number>28</number></property>
+   <property name="topMargin"><number>24</number></property>
+   <property name="rightMargin"><number>28</number></property>
+   <property name="bottomMargin"><number>24</number></property>
+   <item>
+    <layout class="QHBoxLayout" name="layoutTopo">
+     <item>
+      <widget class="QPushButton" name="btnVoltar">
+       <property name="minimumSize"><size><width>215</width><height>42</height></size></property>
+       <property name="text"><string>← Voltar ao menu principal</string></property>
+       <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="espacoTopoDireita">
+       <property name="orientation"><enum>Qt::Horizontal</enum></property>
+       <property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="espacoSuperior">
+     <property name="orientation"><enum>Qt::Vertical</enum></property>
+     <property name="sizeHint" stdset="0"><size><width>20</width><height>18</height></size></property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="layoutCentro">
+     <item>
+      <spacer name="espacoEsquerda">
+       <property name="orientation"><enum>Qt::Horizontal</enum></property>
+       <property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QFrame" name="cardConsulta">
+       <property name="minimumSize"><size><width>440</width><height>0</height></size></property>
+       <property name="maximumSize"><size><width>620</width><height>16777215</height></size></property>
+       <property name="frameShape"><enum>QFrame::NoFrame</enum></property>
+       <layout class="QVBoxLayout" name="layoutCard">
+        <property name="spacing"><number>10</number></property>
+        <property name="leftMargin"><number>32</number></property>
+        <property name="topMargin"><number>28</number></property>
+        <property name="rightMargin"><number>32</number></property>
+        <property name="bottomMargin"><number>28</number></property>
+        <item>
+         <widget class="QLabel" name="labelMarca">
+          <property name="text"><string>REDE DE HOTÉIS PARADISE</string></property>
+          <property name="alignment"><set>Qt::AlignCenter</set></property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelTitulo">
+          <property name="text"><string>Consultar disponibilidade</string></property>
+          <property name="alignment"><set>Qt::AlignCenter</set></property>
+          <property name="wordWrap"><bool>true</bool></property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelDescricao">
+          <property name="text"><string>Escolha o hotel, a data e o tipo de quarto.</string></property>
+          <property name="alignment"><set>Qt::AlignCenter</set></property>
+          <property name="wordWrap"><bool>true</bool></property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="espacoAposTitulo">
+          <property name="orientation"><enum>Qt::Vertical</enum></property>
+          <property name="sizeType"><enum>QSizePolicy::Fixed</enum></property>
+          <property name="sizeHint" stdset="0"><size><width>20</width><height>14</height></size></property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelHotel">
+          <property name="text"><string>Hotel</string></property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboHotel">
+          <item><property name="text"><string>Jericoacoara</string></property></item>
+          <item><property name="text"><string>Canoa Quebrada</string></property></item>
+          <item><property name="text"><string>Cumbuco</string></property></item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelData">
+          <property name="text"><string>Data de check-in</string></property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="dataCheckin">
+          <property name="displayFormat"><string>dd/MM/yyyy</string></property>
+          <property name="calendarPopup"><bool>true</bool></property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelQuarto">
+          <property name="text"><string>Tipo de quarto</string></property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboQuarto">
+          <item><property name="text"><string>Solteiro</string></property></item>
+          <item><property name="text"><string>Duplo</string></property></item>
+          <item><property name="text"><string>Casal</string></property></item>
+          <item><property name="text"><string>Triplo</string></property></item>
+          <item><property name="text"><string>Quadruplo</string></property></item>
+         </widget>
+        </item>
+        <item>
+         <spacer name="espacoAntesBotao">
+          <property name="orientation"><enum>Qt::Vertical</enum></property>
+          <property name="sizeType"><enum>QSizePolicy::Fixed</enum></property>
+          <property name="sizeHint" stdset="0"><size><width>20</width><height>12</height></size></property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnConsultar">
+          <property name="minimumSize"><size><width>0</width><height>48</height></size></property>
+          <property name="text"><string>Verificar disponibilidade</string></property>
+          <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelResultado">
+          <property name="minimumSize"><size><width>0</width><height>46</height></size></property>
+          <property name="text"><string>O resultado da consulta aparecerá aqui.</string></property>
+          <property name="alignment"><set>Qt::AlignCenter</set></property>
+          <property name="wordWrap"><bool>true</bool></property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <spacer name="espacoDireita">
+       <property name="orientation"><enum>Qt::Horizontal</enum></property>
+       <property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="espacoInferior">
+     <property name="orientation"><enum>Qt::Vertical</enum></property>
+     <property name="sizeHint" stdset="0"><size><width>20</width><height>18</height></size></property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelRodape">
+     <property name="text"><string>Hotel Paradise • Sistema de reservas</string></property>
+     <property name="alignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
+     <property name="styleSheet"><string notr="true">color: #94A3B8; font-size: 11px; background: transparent;</string></property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

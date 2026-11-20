@@ -193,13 +193,6 @@ QLabel#labelAtendente {
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QLabel" name="labelAtendente">
        <property name="styleSheet">
         <string notr="true">
@@ -216,6 +209,13 @@ QLabel#labelTitulo {
        </property>
        <property name="alignment">
         <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </item>
@@ -248,7 +248,7 @@ QPushButton:pressed {
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="btnListarReservas">
        <property name="enabled">
         <bool>true</bool>
        </property>

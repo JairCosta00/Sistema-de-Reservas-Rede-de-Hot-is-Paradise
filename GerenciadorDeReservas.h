@@ -40,6 +40,11 @@ class GerenciadorDeReservas
 
         // Getter do Atendente logado atualmente
         Atendente* getAtendenteLogado();
+
+        const std::vector<Reserva>& getReservas() const {
+            return listaReservas;
+        }
+
 };
 
 #endif
