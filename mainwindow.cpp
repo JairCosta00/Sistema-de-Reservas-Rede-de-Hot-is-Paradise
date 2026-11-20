@@ -12,7 +12,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    setWindowFlags(Qt::Window |
+                   Qt::WindowCloseButtonHint |
+                   Qt::WindowTitleHint);
 
     Atendente* atendente =
         GerenciadorDeReservas::getInstancia()
