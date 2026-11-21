@@ -3,9 +3,7 @@
 
 #include <QDialog>
 
-namespace Ui {
-class TelaDisponibilidade;
-}
+namespace Ui { class TelaDisponibilidade; }
 
 class TelaDisponibilidade : public QDialog
 {
@@ -13,7 +11,7 @@ class TelaDisponibilidade : public QDialog
 
 public:
     explicit TelaDisponibilidade(QWidget *parent = nullptr);
-    ~TelaDisponibilidade();
+    ~TelaDisponibilidade() override;
 
 signals:
     void voltarSolicitado();

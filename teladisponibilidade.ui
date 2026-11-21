@@ -3,253 +3,702 @@
  <class>TelaDisponibilidade</class>
  <widget class="QDialog" name="TelaDisponibilidade">
   <property name="geometry">
-   <rect><x>0</x><y>0</y><width>1100</width><height>720</height></rect>
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>710</height>
+   </rect>
   </property>
   <property name="minimumSize">
-   <size><width>560</width><height>620</height></size>
+   <size>
+    <width>900</width>
+    <height>610</height>
+   </size>
   </property>
-  <property name="windowTitle"><string>Hotel Paradise - Disponibilidade</string></property>
+  <property name="windowTitle">
+   <string>Hotel Paradise - Consultar disponibilidade</string>
+  </property>
   <property name="styleSheet">
-   <string notr="true">QDialog#TelaDisponibilidade {
-    background-color: #F8FAFC;
+   <string>QDialog#TelaDisponibilidade {
+    background: #F5F7FB;
+    font-family: &quot;Segoe UI&quot;;
+    color: #14243D;
 }
-QFrame#cardConsulta {
-    background-color: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 16px;
+QFrame#cardHospedagem, QFrame#cardCliente, QFrame#cardAcoes {
+    background: #FFFFFF;
+    border: 1px solid #E1E7F0;
+    border-radius: 14px;
 }
 QLabel {
     background: transparent;
     border: none;
-    color: #1F2937;
+    color: #334155;
+    font-size: 13px;
 }
 QLabel#labelMarca {
-    color: #B8863B;
-    font-size: 12px;
+    color: #AA7730;
+    font-size: 13px;
+    font-weight: bold;
+}
+QLabel#labelSobretitulo {
+    color: #AA7730;
+    font-size: 11px;
     font-weight: bold;
 }
 QLabel#labelTitulo {
-    font-size: 29px;
+    color: #122039;
+    font-size: 31px;
     font-weight: bold;
-    color: #111827;
 }
-QLabel#labelDescricao {
+QLabel#labelDescricao, QLabel#labelAjudaHospedagem, QLabel#labelAjudaCliente {
     color: #64748B;
     font-size: 13px;
 }
-QLabel#labelHotel, QLabel#labelData, QLabel#labelQuarto {
-    font-size: 13px;
+QLabel#labelSecaoHospedagem, QLabel#labelSecaoCliente {
+    color: #13243C;
+    font-size: 19px;
     font-weight: bold;
-    color: #334155;
+}
+QLabel#labelStatusTitulo {
+    color: #13243C;
+    font-size: 17px;
+    font-weight: bold;
+}
+QLabel#labelDica {
+    color: #64748B;
+    background: #F1F5F9;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 11px 12px;
+    font-size: 12px;
 }
 QLabel#labelResultado {
     color: #64748B;
-    background-color: #F1F5F9;
-    border-radius: 8px;
-    padding: 13px;
+    background: #F1F5F9;
+    border: 1px solid #E2E8F0;
+    border-radius: 9px;
+    padding: 12px;
     font-size: 13px;
 }
-QComboBox, QDateEdit {
-    background-color: #FFFFFF;
-    color: #1F2937;
+QLabel#labelRodape {
+    color: #94A3B8;
+    font-size: 11px;
+}
+QLineEdit, QComboBox, QDateEdit, QSpinBox {
+    background: #FFFFFF;
+    color: #15243A;
     border: 1px solid #CBD5E1;
     border-radius: 8px;
-    padding: 8px 12px;
-    min-height: 30px;
+    padding: 9px 12px;
+    min-height: 28px;
     font-size: 13px;
 }
-QComboBox:hover, QDateEdit:hover {
-    border: 1px solid #64748B;
-}
-QComboBox:focus, QDateEdit:focus {
+QLineEdit:focus, QComboBox:focus, QDateEdit:focus, QSpinBox:focus {
     border: 1px solid #2563EB;
 }
 QComboBox QAbstractItemView {
-    background: white;
-    color: #1F2937;
+    background: #FFFFFF;
+    color: #15243A;
     selection-background-color: #DBEAFE;
-    selection-color: #1E3A8A;
 }
 QPushButton {
-    font-size: 13px;
-    font-weight: bold;
+    min-height: 24px;
     border-radius: 9px;
     padding: 10px 18px;
+    font-size: 13px;
+    font-weight: bold;
 }
+QPushButton#btnVoltar {
+    background: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    color: #334155;
+}
+QPushButton#btnVoltar:hover { background: #F1F5F9; }
 QPushButton#btnConsultar {
-    background-color: #2563EB;
+    background: #2563EB;
     color: #FFFFFF;
     border: 1px solid #2563EB;
 }
-QPushButton#btnConsultar:hover {
-    background-color: #1D4ED8;
-    border-color: #1D4ED8;
+QPushButton#btnConsultar:hover { background: #1D4ED8; }
+QPushButton#btnRealizarReserva {
+    background: #16834A;
+    color: #FFFFFF;
+    border: 1px solid #16834A;
 }
-QPushButton#btnVoltar {
-    background-color: #FFFFFF;
-    color: #334155;
-    border: 1px solid #CBD5E1;
-}
-QPushButton#btnVoltar:hover {
-    background-color: #F1F5F9;
+QPushButton#btnRealizarReserva:hover { background: #166534; }
+QPushButton#btnRealizarReserva:disabled {
+    background: #E5E7EB;
+    color: #64748B;
+    border: 1px solid #D1D5DB;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="layoutPrincipal">
-   <property name="spacing"><number>8</number></property>
-   <property name="leftMargin"><number>28</number></property>
-   <property name="topMargin"><number>24</number></property>
-   <property name="rightMargin"><number>28</number></property>
-   <property name="bottomMargin"><number>24</number></property>
+   <property name="spacing">
+    <number>17</number>
+   </property>
+   <property name="leftMargin">
+    <number>34</number>
+   </property>
+   <property name="topMargin">
+    <number>23</number>
+   </property>
+   <property name="rightMargin">
+    <number>34</number>
+   </property>
+   <property name="bottomMargin">
+    <number>19</number>
+   </property>
    <item>
-    <layout class="QHBoxLayout" name="layoutTopo">
+    <layout class="QHBoxLayout" name="layoutBarraSuperior">
+     <property name="spacing">
+      <number>8</number>
+     </property>
      <item>
       <widget class="QPushButton" name="btnVoltar">
-       <property name="minimumSize"><size><width>215</width><height>42</height></size></property>
-       <property name="text"><string>← Voltar ao menu principal</string></property>
-       <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string>←  Voltar ao menu principal</string>
+       </property>
       </widget>
      </item>
      <item>
-      <spacer name="espacoTopoDireita">
-       <property name="orientation"><enum>Qt::Horizontal</enum></property>
-       <property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property>
+      <spacer name="espacoBarra">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>18</width>
+         <height>18</height>
+        </size>
+       </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelMarca">
+       <property name="text">
+        <string>REDE DE HOTÉIS PARADISE</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
    <item>
-    <spacer name="espacoSuperior">
-     <property name="orientation"><enum>Qt::Vertical</enum></property>
-     <property name="sizeHint" stdset="0"><size><width>20</width><height>18</height></size></property>
-    </spacer>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="layoutCentro">
+    <layout class="QVBoxLayout" name="layoutCabecalho">
+     <property name="spacing">
+      <number>3</number>
+     </property>
      <item>
-      <spacer name="espacoEsquerda">
-       <property name="orientation"><enum>Qt::Horizontal</enum></property>
-       <property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property>
-      </spacer>
+      <widget class="QLabel" name="labelSobretitulo">
+       <property name="text">
+        <string>CONSULTA E RESERVAS</string>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QFrame" name="cardConsulta">
-       <property name="minimumSize"><size><width>440</width><height>0</height></size></property>
-       <property name="maximumSize"><size><width>620</width><height>16777215</height></size></property>
-       <property name="frameShape"><enum>QFrame::NoFrame</enum></property>
-       <layout class="QVBoxLayout" name="layoutCard">
-        <property name="spacing"><number>10</number></property>
-        <property name="leftMargin"><number>32</number></property>
-        <property name="topMargin"><number>28</number></property>
-        <property name="rightMargin"><number>32</number></property>
-        <property name="bottomMargin"><number>28</number></property>
+      <widget class="QLabel" name="labelTitulo">
+       <property name="text">
+        <string>Consultar disponibilidade</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelDescricao">
+       <property name="text">
+        <string>Consulte os quartos disponíveis e registre uma nova hospedagem.</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="layoutPaineis" stretch="1,1">
+     <property name="spacing">
+      <number>18</number>
+     </property>
+     <item>
+      <widget class="QFrame" name="cardHospedagem">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::NoFrame</enum>
+       </property>
+       <layout class="QVBoxLayout" name="layoutHospedagem">
+        <property name="spacing">
+         <number>9</number>
+        </property>
+        <property name="leftMargin">
+         <number>24</number>
+        </property>
+        <property name="topMargin">
+         <number>21</number>
+        </property>
+        <property name="rightMargin">
+         <number>24</number>
+        </property>
+        <property name="bottomMargin">
+         <number>21</number>
+        </property>
         <item>
-         <widget class="QLabel" name="labelMarca">
-          <property name="text"><string>REDE DE HOTÉIS PARADISE</string></property>
-          <property name="alignment"><set>Qt::AlignCenter</set></property>
+         <widget class="QLabel" name="labelSecaoHospedagem">
+          <property name="text">
+           <string>01  Dados da hospedagem</string>
+          </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="labelTitulo">
-          <property name="text"><string>Consultar disponibilidade</string></property>
-          <property name="alignment"><set>Qt::AlignCenter</set></property>
-          <property name="wordWrap"><bool>true</bool></property>
+         <widget class="QLabel" name="labelAjudaHospedagem">
+          <property name="text">
+           <string>Escolha o hotel, as datas e o tipo de quarto.</string>
+          </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="labelDescricao">
-          <property name="text"><string>Escolha o hotel, a data e o tipo de quarto.</string></property>
-          <property name="alignment"><set>Qt::AlignCenter</set></property>
-          <property name="wordWrap"><bool>true</bool></property>
-         </widget>
+         <layout class="QGridLayout" name="gridHospedagem">
+          <property name="spacing">
+           <number>8</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelHotel">
+            <property name="text">
+             <string>Hotel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="labelData">
+            <property name="text">
+             <string>Data de check-in</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QComboBox" name="comboHotel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <item>
+             <property name="text">
+              <string>Jericoacoara</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Canoa Quebrada</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Cumbuco</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QDateEdit" name="dataCheckin">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="displayFormat">
+             <string>dd/MM/yyyy</string>
+            </property>
+            <property name="calendarPopup">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelQuarto">
+            <property name="text">
+             <string>Tipo de quarto</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="labelDiarias">
+            <property name="text">
+             <string>Número de diárias</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QComboBox" name="comboQuarto">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <item>
+             <property name="text">
+              <string>Solteiro</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Duplo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Casal</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Triplo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Quadruplo</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QSpinBox" name="spinDiarias">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>365</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
-         <spacer name="espacoAposTitulo">
-          <property name="orientation"><enum>Qt::Vertical</enum></property>
-          <property name="sizeType"><enum>QSizePolicy::Fixed</enum></property>
-          <property name="sizeHint" stdset="0"><size><width>20</width><height>14</height></size></property>
+         <spacer name="espacoHospedagemInferior">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Policy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>18</width>
+            <height>18</height>
+           </size>
+          </property>
          </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="labelHotel">
-          <property name="text"><string>Hotel</string></property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboHotel">
-          <item><property name="text"><string>Jericoacoara</string></property></item>
-          <item><property name="text"><string>Canoa Quebrada</string></property></item>
-          <item><property name="text"><string>Cumbuco</string></property></item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="labelData">
-          <property name="text"><string>Data de check-in</string></property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDateEdit" name="dataCheckin">
-          <property name="displayFormat"><string>dd/MM/yyyy</string></property>
-          <property name="calendarPopup"><bool>true</bool></property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="labelQuarto">
-          <property name="text"><string>Tipo de quarto</string></property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboQuarto">
-          <item><property name="text"><string>Solteiro</string></property></item>
-          <item><property name="text"><string>Duplo</string></property></item>
-          <item><property name="text"><string>Casal</string></property></item>
-          <item><property name="text"><string>Triplo</string></property></item>
-          <item><property name="text"><string>Quadruplo</string></property></item>
-         </widget>
-        </item>
-        <item>
-         <spacer name="espacoAntesBotao">
-          <property name="orientation"><enum>Qt::Vertical</enum></property>
-          <property name="sizeType"><enum>QSizePolicy::Fixed</enum></property>
-          <property name="sizeHint" stdset="0"><size><width>20</width><height>12</height></size></property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnConsultar">
-          <property name="minimumSize"><size><width>0</width><height>48</height></size></property>
-          <property name="text"><string>Verificar disponibilidade</string></property>
-          <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="labelResultado">
-          <property name="minimumSize"><size><width>0</width><height>46</height></size></property>
-          <property name="text"><string>O resultado da consulta aparecerá aqui.</string></property>
-          <property name="alignment"><set>Qt::AlignCenter</set></property>
-          <property name="wordWrap"><bool>true</bool></property>
-         </widget>
         </item>
        </layout>
       </widget>
      </item>
      <item>
-      <spacer name="espacoDireita">
-       <property name="orientation"><enum>Qt::Horizontal</enum></property>
-       <property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property>
-      </spacer>
+      <widget class="QFrame" name="cardCliente">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::NoFrame</enum>
+       </property>
+       <layout class="QVBoxLayout" name="layoutCliente">
+        <property name="spacing">
+         <number>9</number>
+        </property>
+        <property name="leftMargin">
+         <number>24</number>
+        </property>
+        <property name="topMargin">
+         <number>21</number>
+        </property>
+        <property name="rightMargin">
+         <number>24</number>
+        </property>
+        <property name="bottomMargin">
+         <number>21</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="labelSecaoCliente">
+          <property name="text">
+           <string>02  Dados do cliente</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelAjudaCliente">
+          <property name="text">
+           <string>Preencha os dados para concluir a reserva.</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridCliente">
+          <property name="spacing">
+           <number>8</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelNomeCliente">
+            <property name="text">
+             <string>Nome completo</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="labelCpf">
+            <property name="text">
+             <string>CPF do cliente</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLineEdit" name="editNomeCliente">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="placeholderText">
+             <string>Nome completo do hóspede</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="editCpfCliente">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maxLength">
+             <number>14</number>
+            </property>
+            <property name="placeholderText">
+             <string>11 dígitos</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <widget class="QLabel" name="labelDesconto">
+            <property name="text">
+             <string>Desconto aplicável</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <widget class="QComboBox" name="comboDesconto">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <item>
+             <property name="text">
+              <string>Sem desconto</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Cliente VIP (10%)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Baixa temporada (20%)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Promocional (15%)</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelDica">
+          <property name="text">
+           <string>Para realizar a reserva, verifique primeiro se o quarto está disponível no período.</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="espacoClienteInferior">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Policy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>18</width>
+            <height>18</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
      </item>
     </layout>
    </item>
    <item>
-    <spacer name="espacoInferior">
-     <property name="orientation"><enum>Qt::Vertical</enum></property>
-     <property name="sizeHint" stdset="0"><size><width>20</width><height>18</height></size></property>
+    <widget class="QFrame" name="cardAcoes">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::NoFrame</enum>
+     </property>
+     <layout class="QVBoxLayout" name="layoutStatus">
+      <property name="spacing">
+       <number>10</number>
+      </property>
+      <property name="leftMargin">
+       <number>23</number>
+      </property>
+      <property name="topMargin">
+       <number>17</number>
+      </property>
+      <property name="rightMargin">
+       <number>23</number>
+      </property>
+      <property name="bottomMargin">
+       <number>17</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="labelStatusTitulo">
+        <property name="text">
+         <string>Status da consulta</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="layoutResultadoAcoes" stretch="3,0,0">
+        <property name="spacing">
+         <number>14</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="labelResultado">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>O resultado da consulta aparecerá aqui.</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnConsultar">
+          <property name="minimumSize">
+           <size>
+            <width>195</width>
+            <height>46</height>
+           </size>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>Verificar disponibilidade</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnRealizarReserva">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>158</width>
+            <height>46</height>
+           </size>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>Realizar reserva</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="espacoFundoFlex">
+     <property name="orientation">
+      <enum>Qt::Orientation::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Policy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>18</width>
+       <height>18</height>
+      </size>
+     </property>
     </spacer>
    </item>
    <item>
     <widget class="QLabel" name="labelRodape">
-     <property name="text"><string>Hotel Paradise • Sistema de reservas</string></property>
-     <property name="alignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
-     <property name="styleSheet"><string notr="true">color: #94A3B8; font-size: 11px; background: transparent;</string></property>
+     <property name="text">
+      <string>Hotel Paradise  •  Sistema de gerenciamento de reservas</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+     </property>
     </widget>
    </item>
   </layout>

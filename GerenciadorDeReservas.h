@@ -24,7 +24,8 @@ class GerenciadorDeReservas
         static GerenciadorDeReservas* getInstancia();
 
         // Verificação de Disponibilidade (1 quarto de cada tipo por hotel)
-        bool verificarDisponibilidade(string local, string dataCheckin, string tipoQuarto);
+        bool verificarDisponibilidade(string local, string dataCheckin,
+                                     string tipoQuarto, int numeroDiarias = 1);
 
         // Adiciona nova reserva à memória
         void adicionarReserva(Reserva r);
@@ -35,16 +36,20 @@ class GerenciadorDeReservas
         // Persistência de dados (arquivo .txt), e ordenação.
         void salvarEmArquivoTxt();
 
+        // Recupera as reservas salvas no relatorio TXT.
+        void carregarDeArquivoTxt();
+
         // Autenticação de atendentes
         bool realizarLogin(string login, string senha);
 
         // Getter do Atendente logado atualmente
         Atendente* getAtendenteLogado();
 
-        const std::vector<Reserva>& getReservas() const {
-            return listaReservas;
-        }
+        // Retorna todas as reservas para a tela de listagem.
+        const std::vector<Reserva>& getReservas() const { return listaReservas; }
 
+        // Retorna a tela de login
+        void encerrarSessao();
 };
 
 #endif

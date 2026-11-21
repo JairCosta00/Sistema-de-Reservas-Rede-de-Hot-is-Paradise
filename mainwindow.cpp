@@ -4,6 +4,7 @@
 #include "GerenciadorDeReservas.h"
 #include "teladisponibilidade.h"
 #include "telalistagem.h"
+#include "logindialog.h"
 
 #include <QStackedWidget>
 #include <QApplication>
@@ -93,34 +94,68 @@ MainWindow::MainWindow(QWidget *parent)
     // Adiciona ao gerenciador de páginas
     paginas->addWidget(telaListagem);
 
-
     // ========================================
-    // BOTÃO SAIR DO SISTEMA
+    // BOTÃO SAIR - VOLTAR PARA O LOGIN
     // ========================================
-
-    connect(ui->btnSair,
-            &QPushButton::clicked,
+    connect(ui->btnSair, &QPushButton::clicked,
             this, [this]() {
 
-                QMessageBox::StandardButton resposta =
-                    QMessageBox::question(
-                        this,
-                        "Sair do Sistema",
-                        "Deseja realmente sair do sistema?",
-                        QMessageBox::Yes | QMessageBox::No,
-                        QMessageBox::No
-                        );
+                auto resposta = QMessageBox::question(
+                    this,
+                    "Sair da conta",
+                    "Deseja sair da conta e voltar ao login?",
+                    QMessageBox::Yes | QMessageBox::No,
+                    QMessageBox::No
+                    );
 
                 if (resposta == QMessageBox::Yes) {
 
-                    // Salva as reservas existentes
-                    GerenciadorDeReservas::getInstancia()
-                        ->salvarEmArquivoTxt();
+                    auto* gerenciador =
+                        GerenciadorDeReservas::getInstancia();
 
-                    // Encerra o sistema
-                    QApplication::quit();
+                    // Salva as reservas existentes
+                    gerenciador->salvarEmArquivoTxt();
+
+                    // Desconecta o atendente atual
+                    gerenciador->encerrarSessao();
+
+                    // Evita que o aplicativo encerre
+                    // durante a troca de telas
+                    QApplication::setQuitOnLastWindowClosed(false);
+
+                    // Esconde o menu principal
+                    this->hide();
+
+                    // Abre novamente a tela de login
+                    LoginDialog login;
+
+                    if (login.exec() == QDialog::Accepted) {
+
+                        // Recupera o novo atendente
+                        Atendente* atendente =
+                            gerenciador->getAtendenteLogado();
+
+                        if (atendente != nullptr) {
+                            ui->labelAtendente->setText(
+                                "Atendente: " +
+                                QString::fromStdString(
+                                    atendente->getNome()
+                                    )
+                                );
+                        }
+
+                        // Mostra o menu principal novamente
+                        this->showMaximized();
+
+                        QApplication::setQuitOnLastWindowClosed(true);
+
+                    } else {
+                        // Encerra se o login for cancelado
+                        QApplication::quit();
+                    }
                 }
             });
+
 
     // Botão Listar Reservas
     connect(ui->btnListarReservas,

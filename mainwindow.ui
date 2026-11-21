@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
@@ -6,320 +6,739 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1322</width>
-    <height>709</height>
+    <width>1180</width>
+    <height>720</height>
    </rect>
   </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
+  <property name="minimumSize">
+   <size>
+    <width>840</width>
+    <height>570</height>
+   </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Hotel Paradise - Menu principal</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>20</y>
-      <width>601</width>
-      <height>451</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout"/>
-   </widget>
-   <widget class="QFrame" name="frameFundoEscuro">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>10</y>
-      <width>1322</width>
-      <height>709</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">
-QFrame#frameFundoEscuro {
+   <property name="styleSheet">
+    <string>QWidget#centralwidget {
+    background-color: #F6F8FC;
+    color: #1F2937;
+    font-family: "Segoe UI";
+}
+QFrame#frameFundoEscuro { background: transparent; border: none; }
+QFrame#cardConsulta, QFrame#cardLista {
     background-color: #FFFFFF;
-    border: none;
+    border: 1px solid #DFE5ED;
+    border-radius: 15px;
 }
-
-QLabel {
-    background: transparent;
-    border: none;
+QFrame#frameSessao {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
 }
-
-/* Nome do hotel */
-QLabel#labelMarca {
-    color: #B8863B;
+QLabel { background: transparent; border: none; color: #334155; }
+QLabel#labelMarca { color: #AD7F35; font-size: 13px; font-weight: bold; }
+QLabel#labelSistema { color: #64748B; font-size: 12px; }
+QLabel#labelDestaque, QLabel#labelCategoriaConsulta, QLabel#labelCategoriaLista {
+    color: #AD7F35; font-size: 11px; font-weight: bold;
+}
+QLabel#labelTitulo { color: #152238; font-size: 34px; font-weight: bold; }
+QLabel#labelDescricao { color: #64748B; font-size: 14px; }
+QLabel#labelAtendente {
+    color: #1D4ED8; background-color: #EFF6FF;
+    border: 1px solid #BFDBFE; border-radius: 9px;
+    font-size: 13px; font-weight: bold; padding: 10px 15px;
+}
+QLabel#labelConsultaTitulo, QLabel#labelListaTitulo {
+    color: #17243A; font-size: 21px; font-weight: bold;
+}
+QLabel#labelConsultaDescricao, QLabel#labelListaDescricao, QLabel#labelSessaoDescricao {
+    color: #64748B; font-size: 13px;
+}
+QLabel#labelSessaoTitulo { color: #243247; font-size: 14px; font-weight: bold; }
+QLabel#labelRodape { color: #94A3B8; font-size: 11px; }
+QPushButton {
+    border-radius: 10px;
+    padding: 12px 18px;
+    min-height: 30px;
     font-size: 13px;
     font-weight: bold;
-    letter-spacing: 2px;
 }
-
-/* Título */
-QLabel#labelTitulo {
-    color: #1F2937;
-    font-size: 32px;
-    font-weight: bold;
-}
-
-/* Atendente */
-QLabel#labelAtendente {
-    color: #475569;
-    font-size: 17px;
-}
-
-/* Rodapé */
-QLabel#labelRodape {
-    color: #64748B;
-    font-size: 11px;
-}
-
-/* Configuração de todos os botões */
-QPushButton {
-    color: #1F2937;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 12px;
-    padding: 0px 12px;
-}
-
-/* Consultar disponibilidade */
 QPushButton#btnConsultarReserva {
-    background-color: #FFFFFF;
-    border: 1px solid #94A3B8;
+    background-color: #2563EB; color: white; border: 1px solid #2563EB;
 }
-
-QPushButton#btnConsultarReserva:hover {
-    background-color: #F1F5F9;
-    border: 1px solid #64748B;
-}
-
-/* Listar reservas */
+QPushButton#btnConsultarReserva:hover { background-color: #1D4ED8; }
+QPushButton#btnConsultarReserva:pressed { background-color: #1E40AF; }
 QPushButton#btnListarReservas {
-    background-color: #FFFFFF;
-    border: 1px solid #94A3B8;
+    background-color: #FFFFFF; color: #1D4ED8; border: 1px solid #93C5FD;
 }
-
-QPushButton#btnListarReservas:hover {
-    background-color: #F1F5F9;
-    border: 1px solid #64748B;
-}
-
-/* Sair */
+QPushButton#btnListarReservas:hover { background-color: #EFF6FF; }
+QPushButton#btnListarReservas:pressed { background-color: #DBEAFE; }
 QPushButton#btnSair {
-    color: #B91C1C;
-    background-color: #FEF2F2;
-    border: 1px solid #EF4444;
+    background-color: #FFFFFF; color: #B91C1C; border: 1px solid #FECACA;
 }
-
-QPushButton#btnSair:hover {
-    color: #FFFFFF;
-    background-color: #DC2626;
-}
-
-/* Efeito ao clicar */
-QPushButton:pressed {
-    background-color: #E2E8F0;
-}
+QPushButton#btnSair:hover { background-color: #FEF2F2; border: 1px solid #EF4444; }
+QPushButton#btnSair:pressed { background-color: #FEE2E2; }
 </string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Shape::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Shadow::Raised</enum>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <property name="leftMargin">
-      <number>200</number>
-     </property>
-     <property name="topMargin">
-      <number>9</number>
-     </property>
-     <property name="rightMargin">
-      <number>200</number>
-     </property>
-     <property name="bottomMargin">
-      <number>120</number>
-     </property>
-     <item>
-      <widget class="QLabel" name="labelTitulo">
-       <property name="font">
-        <font>
-         <pointsize>-1</pointsize>
-         <bold>true</bold>
-         <stylestrategy>PreferDefault</stylestrategy>
-        </font>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LayoutDirection::LeftToRight</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">
-QLabel#labelAtendente {
-    font-size: 18px;
-    font-weight: 500;
-    color: white;
-    background: transparent;
-}
-</string>
-       </property>
-       <property name="text">
-        <string>Menu Principal</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="labelAtendente">
-       <property name="styleSheet">
-        <string notr="true">
-QLabel#labelTitulo {
-    font-size: 32px;
-    font-weight: bold;
-    color: white;
-    background: transparent;
-}
-</string>
-       </property>
-       <property name="text">
-        <string>Atendente: Ana</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnConsultarReserva">
-       <property name="styleSheet">
-        <string notr="true">
-QPushButton {
-    background-color: #2563EB;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 14px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-QPushButton:hover {
-    background-color: #1D4ED8;
-}
-
-QPushButton:pressed {
-    background-color: #1E40AF;
-}
-</string>
-       </property>
-       <property name="text">
-        <string>Consultar disponibilidade / Realizar reserva</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnListarReservas">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">
-QPushButton {
-    background-color: #2563EB;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 14px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-QPushButton:hover {
-    background-color: #1D4ED8;
-}
-
-QPushButton:pressed {
-    background-color: #1E40AF;
-}
-</string>
-       </property>
-       <property name="text">
-        <string>Listar reservas</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnSair">
-       <property name="styleSheet">
-        <string notr="true">
-QPushButton {
-    background-color: #2563EB;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 14px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-QPushButton:hover {
-    background-color: #1D4ED8;
-}
-
-QPushButton:pressed {
-    background-color: #1E40AF;
-}
-</string>
-       </property>
-       <property name="text">
-        <string>Sair do sistema</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1322</width>
-     <height>21</height>
-    </rect>
    </property>
+   <layout class="QVBoxLayout" name="layoutJanela">
+    <property name="spacing">
+     <number>16</number>
+    </property>
+    <property name="leftMargin">
+     <number>34</number>
+    </property>
+    <property name="topMargin">
+     <number>26</number>
+    </property>
+    <property name="rightMargin">
+     <number>34</number>
+    </property>
+    <property name="bottomMargin">
+     <number>22</number>
+    </property>
+    <item>
+     <layout class="QHBoxLayout" name="layoutBarraSuperior">
+      <property name="spacing">
+       <number>12</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="labelMarca">
+        <property name="text">
+         <string>REDE DE HOTÉIS PARADISE</string>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>11</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="espacoBarraSuperior">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint">
+         <size>
+          <width>24</width>
+          <height>12</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelSistema">
+        <property name="text">
+         <string>SISTEMA DE GERENCIAMENTO DE RESERVAS</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <spacer name="espacoSuperior">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Expanding</enum>
+      </property>
+      <property name="sizeHint">
+       <size>
+        <width>12</width>
+        <height>35</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="layoutCentro">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <spacer name="espacoEsquerda">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint">
+         <size>
+          <width>24</width>
+          <height>12</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QFrame" name="frameFundoEscuro">
+        <property name="minimumSize">
+         <size>
+          <width>720</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>990</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <layout class="QVBoxLayout" name="layoutConteudoPrincipal">
+         <property name="spacing">
+          <number>15</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="labelDestaque">
+           <property name="text">
+            <string>ÁREA DO ATENDENTE</string>
+           </property>
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>9</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="labelTitulo">
+           <property name="text">
+            <string>Menu Principal</string>
+           </property>
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>28</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="labelDescricao">
+           <property name="text">
+            <string>Escolha uma opção para gerenciar hospedagens e reservas.</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="espacoPequenoCabecalho">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint">
+            <size>
+             <width>1</width>
+             <height>3</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="layoutAtendente">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="labelAtendente">
+             <property name="text">
+              <string>Atendente: Administrador</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="espacoAtendente">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+             </property>
+             <property name="sizeHint">
+              <size>
+               <width>24</width>
+               <height>12</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="espacoEntreCabecalhoECards">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint">
+            <size>
+             <width>1</width>
+             <height>13</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="layoutCartoes">
+           <property name="spacing">
+            <number>18</number>
+           </property>
+           <item>
+            <widget class="QFrame" name="cardConsulta">
+             <property name="minimumSize">
+              <size>
+               <width>330</width>
+               <height>225</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <layout class="QVBoxLayout" name="layoutCartaoConsulta">
+              <property name="spacing">
+               <number>15</number>
+              </property>
+              <property name="leftMargin">
+               <number>24</number>
+              </property>
+              <property name="topMargin">
+               <number>26</number>
+              </property>
+              <property name="rightMargin">
+               <number>24</number>
+              </property>
+              <property name="bottomMargin">
+               <number>24</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="labelCategoriaConsulta">
+                <property name="text">
+                 <string>DISPONIBILIDADE E CADASTRO</string>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Segoe UI</family>
+                  <pointsize>9</pointsize>
+                  <bold>true</bold>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="labelConsultaTitulo">
+                <property name="text">
+                 <string>Consultar quartos</string>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Segoe UI</family>
+                  <pointsize>17</pointsize>
+                  <bold>true</bold>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="labelConsultaDescricao">
+                <property name="text">
+                 <string>Verifique a ocupação dos hotéis e registre novas hospedagens.</string>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="espacoConsulta">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Expanding</enum>
+                </property>
+                <property name="sizeHint">
+                 <size>
+                  <width>12</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnConsultarReserva">
+                <property name="text">
+                 <string>Consultar disponibilidade / Realizar reserva</string>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>52</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>58</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="cardLista">
+             <property name="minimumSize">
+              <size>
+               <width>330</width>
+               <height>225</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <layout class="QVBoxLayout" name="layoutCartaoLista">
+              <property name="spacing">
+               <number>15</number>
+              </property>
+              <property name="leftMargin">
+               <number>24</number>
+              </property>
+              <property name="topMargin">
+               <number>26</number>
+              </property>
+              <property name="rightMargin">
+               <number>24</number>
+              </property>
+              <property name="bottomMargin">
+               <number>24</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="labelCategoriaLista">
+                <property name="text">
+                 <string>GESTÃO DE RESERVAS</string>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Segoe UI</family>
+                  <pointsize>9</pointsize>
+                  <bold>true</bold>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="labelListaTitulo">
+                <property name="text">
+                 <string>Reservas cadastradas</string>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Segoe UI</family>
+                  <pointsize>17</pointsize>
+                  <bold>true</bold>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="labelListaDescricao">
+                <property name="text">
+                 <string>Consulte dados, acompanhe os valores e confira o status de cada reserva.</string>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="espacoLista">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Expanding</enum>
+                </property>
+                <property name="sizeHint">
+                 <size>
+                  <width>12</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnListarReservas">
+                <property name="text">
+                 <string>Listar reservas</string>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>52</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>58</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="espacoAntesSair">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint">
+            <size>
+             <width>1</width>
+             <height>4</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QFrame" name="frameSessao">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <layout class="QHBoxLayout" name="layoutSessao">
+            <property name="spacing">
+             <number>18</number>
+            </property>
+            <property name="leftMargin">
+             <number>24</number>
+            </property>
+            <property name="topMargin">
+             <number>16</number>
+            </property>
+            <property name="rightMargin">
+             <number>24</number>
+            </property>
+            <property name="bottomMargin">
+             <number>16</number>
+            </property>
+            <item>
+             <layout class="QVBoxLayout" name="layoutTextoSessao">
+              <property name="spacing">
+               <number>4</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="labelSessaoTitulo">
+                <property name="text">
+                 <string>Trocar de atendente?</string>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Segoe UI</family>
+                  <pointsize>12</pointsize>
+                  <bold>true</bold>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="labelSessaoDescricao">
+                <property name="text">
+                 <string>Encerre a sessão atual e volte à tela de login.</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer name="espacoSessao">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="sizeHint">
+               <size>
+                <width>24</width>
+                <height>12</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnSair">
+              <property name="text">
+               <string>Sair da conta</string>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>160</width>
+                <height>46</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>195</width>
+                <height>54</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <spacer name="espacoDireita">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint">
+         <size>
+          <width>24</width>
+          <height>12</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <spacer name="espacoInferior">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Expanding</enum>
+      </property>
+      <property name="sizeHint">
+       <size>
+        <width>12</width>
+        <height>35</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="layoutRodape">
+      <item>
+       <spacer name="espacoRodape">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint">
+         <size>
+          <width>24</width>
+          <height>12</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelRodape">
+        <property name="text">
+         <string>Hotel Paradise  •  Sistema de gerenciamento de reservas</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

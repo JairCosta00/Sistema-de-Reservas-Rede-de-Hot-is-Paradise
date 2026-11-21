@@ -12,53 +12,130 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>660</width>
-    <height>490</height>
+    <width>750</width>
+    <height>520</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Hotel Paradise - Listar reservas</string>
   </property>
   <property name="styleSheet">
-   <string>QWidget#TelaListagem { background-color: #F8FAFC; }
-QFrame#frameTabela { background-color: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; }
-QLabel { background: transparent; border: none; color: #1F2937; }
-QLabel#labelMarca { color: #B8863B; font-size: 12px; font-weight: bold; }
-QLabel#labelTitulo { color: #111827; font-size: 30px; font-weight: bold; }
-QLabel#labelDescricao { color: #64748B; font-size: 13px; }
-QLabel#labelTotal { color: #334155; font-size: 15px; font-weight: bold; }
-QLabel#labelVazio { color: #94A3B8; font-size: 13px; }
-QLabel#labelRodape { color: #94A3B8; font-size: 11px; }
-QPushButton { font-size: 13px; font-weight: bold; border-radius: 9px; padding: 10px 18px; }
-QPushButton#btnVoltar { color: #334155; background: #FFFFFF; border: 1px solid #CBD5E1; }
-QPushButton#btnVoltar:hover { background: #F1F5F9; }
-QPushButton#btnAtualizar { color: #FFFFFF; background: #2563EB; border: 1px solid #2563EB; }
-QPushButton#btnAtualizar:hover { background: #1D4ED8; }
-QTableWidget#tabelaReservas { background-color: #FFFFFF; alternate-background-color: #F8FAFC; color: #1F2937; border: none; selection-background-color: #DBEAFE; selection-color: #1E3A8A; font-size: 12px; }
-QHeaderView::section { background: #F1F5F9; color: #475569; border: none; border-bottom: 1px solid #E2E8F0; padding: 10px; font-size: 12px; font-weight: bold; }
-QTableCornerButton::section { background: #F1F5F9; border: none; }
+   <string>QWidget#TelaListagem {
+    background-color: #F6F8FC;
+    color: #1F2937;
+    font-family: &quot;Segoe UI&quot;;
+}
+QFrame#frameTabela {
+    background-color: #FFFFFF;
+    border: 1px solid #DFE5ED;
+    border-radius: 15px;
+}
+QLabel {
+    background: transparent;
+    border: none;
+    color: #1F2937;
+}
+QLabel#labelMarca {
+    color: #AD7F35;
+    font-size: 13px;
+    font-weight: bold;
+}
+QLabel#labelTitulo {
+    color: #152238;
+    font-size: 31px;
+    font-weight: 700;
+}
+QLabel#labelDescricao {
+    color: #64748B;
+    font-size: 13px;
+}
+QLabel#labelTotal {
+    color: #1D4ED8;
+    background-color: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: 9px;
+    padding: 9px 13px;
+    font-size: 13px;
+    font-weight: bold;
+}
+QLabel#labelVazio {
+    color: #64748B;
+    font-size: 13px;
+}
+QLabel#labelRodape {
+    color: #94A3B8;
+    font-size: 11px;
+}
+QPushButton {
+    border-radius: 9px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: bold;
+    min-height: 20px;
+}
+QPushButton#btnVoltar {
+    color: #334155;
+    background-color: #FFFFFF;
+    border: 1px solid #CAD5E3;
+}
+QPushButton#btnVoltar:hover { background-color: #EDF2F7; }
+QPushButton#btnVoltar:pressed { background-color: #E2E8F0; }
+QPushButton#btnAtualizar {
+    color: #FFFFFF;
+    background-color: #2563EB;
+    border: 1px solid #2563EB;
+}
+QPushButton#btnAtualizar:hover { background-color: #1D4ED8; }
+QPushButton#btnAtualizar:pressed { background-color: #1E40AF; }
+QTableWidget#tabelaReservas {
+    background-color: #FFFFFF;
+    alternate-background-color: #FAFCFF;
+    color: #243247;
+    border: 1px solid #DFE5ED;
+    border-radius: 8px;
+    gridline-color: #EDF2F7;
+    selection-background-color: #DBEAFE;
+    selection-color: #152238;
+    font-size: 13px;
+    outline: none;
+}
+QTableWidget#tabelaReservas::item {
+    padding: 8px 6px;
+    border-bottom: 1px solid #EDF2F7;
+}
+QTableWidget#tabelaReservas::item:hover { background-color: #EFF6FF; }
+QHeaderView::section {
+    background-color: #ECF1F7;
+    color: #334155;
+    border: none;
+    border-bottom: 1px solid #D9E1EC;
+    padding: 13px 9px;
+    font-weight: bold;
+    font-size: 12px;
+}
+QTableCornerButton::section { background-color: #ECF1F7; border: none; }
 </string>
   </property>
   <layout class="QVBoxLayout" name="layoutPrincipal">
    <property name="spacing">
-    <number>12</number>
+    <number>15</number>
    </property>
    <property name="leftMargin">
-    <number>28</number>
+    <number>34</number>
    </property>
    <property name="topMargin">
-    <number>24</number>
+    <number>26</number>
    </property>
    <property name="rightMargin">
-    <number>28</number>
+    <number>34</number>
    </property>
    <property name="bottomMargin">
-    <number>24</number>
+    <number>22</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="layoutVoltar">
+    <layout class="QHBoxLayout" name="layoutBarraSuperior">
      <property name="spacing">
-      <number>0</number>
+      <number>10</number>
      </property>
      <item>
       <widget class="QPushButton" name="btnVoltar">
@@ -68,7 +145,7 @@ QTableCornerButton::section { background: #F1F5F9; border: none; }
       </widget>
      </item>
      <item>
-      <spacer name="espacoDireita">
+      <spacer name="espacoTopo">
        <property name="orientation">
         <enum>Qt::Orientation::Horizontal</enum>
        </property>
@@ -78,74 +155,82 @@ QTableCornerButton::section { background: #F1F5F9; border: none; }
        <property name="sizeHint" stdset="0">
         <size>
          <width>20</width>
-         <height>20</height>
+         <height>5</height>
         </size>
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QLabel" name="labelMarca">
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>-1</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>REDE DE HOTÉIS PARADISE</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
-    <spacer name="espacoCabecalho">
-     <property name="orientation">
-      <enum>Qt::Orientation::Vertical</enum>
+    <layout class="QVBoxLayout" name="layoutCabecalho">
+     <property name="spacing">
+      <number>5</number>
      </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Policy::Fixed</enum>
+     <property name="leftMargin">
+      <number>0</number>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>8</width>
-       <height>12</height>
-      </size>
+     <property name="topMargin">
+      <number>13</number>
      </property>
-    </spacer>
-   </item>
-   <item>
-    <widget class="QLabel" name="labelMarca">
-     <property name="text">
-      <string>REDE DE HOTÉIS PARADISE</string>
+     <property name="rightMargin">
+      <number>0</number>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
+     <property name="bottomMargin">
+      <number>9</number>
      </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="labelTitulo">
-     <property name="text">
-      <string>Reservas cadastradas</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="labelDescricao">
-     <property name="text">
-      <string>Consulte os dados das hospedagens e acompanhe o status das reservas.</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <spacer name="espacoAntesTabela">
-     <property name="orientation">
-      <enum>Qt::Orientation::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Policy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>8</width>
-       <height>14</height>
-      </size>
-     </property>
-    </spacer>
+     <item>
+      <widget class="QLabel" name="labelTitulo">
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>-1</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Reservas cadastradas</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelDescricao">
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>-1</pointsize>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Consulte os dados das hospedagens e acompanhe o status das reservas.</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QFrame" name="frameTabela">
@@ -154,19 +239,19 @@ QTableCornerButton::section { background: #F1F5F9; border: none; }
      </property>
      <layout class="QVBoxLayout" name="layoutTabela">
       <property name="spacing">
-       <number>12</number>
+       <number>15</number>
       </property>
       <property name="leftMargin">
-       <number>18</number>
+       <number>20</number>
       </property>
       <property name="topMargin">
-       <number>16</number>
-      </property>
-      <property name="rightMargin">
        <number>18</number>
       </property>
+      <property name="rightMargin">
+       <number>20</number>
+      </property>
       <property name="bottomMargin">
-       <number>16</number>
+       <number>17</number>
       </property>
       <item>
        <layout class="QHBoxLayout" name="layoutAcoes">
@@ -175,6 +260,13 @@ QTableCornerButton::section { background: #F1F5F9; border: none; }
         </property>
         <item>
          <widget class="QLabel" name="labelTotal">
+          <property name="font">
+           <font>
+            <family>Segoe UI</family>
+            <pointsize>-1</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
            <string>0 reservas cadastradas</string>
           </property>
@@ -194,7 +286,7 @@ QTableCornerButton::section { background: #F1F5F9; border: none; }
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>20</height>
+            <height>5</height>
            </size>
           </property>
          </spacer>
@@ -226,6 +318,13 @@ QTableCornerButton::section { background: #F1F5F9; border: none; }
       </item>
       <item>
        <widget class="QLabel" name="labelVazio">
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>-1</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
          <string>Nenhuma reserva cadastrada nesta execução.</string>
         </property>
@@ -239,8 +338,15 @@ QTableCornerButton::section { background: #F1F5F9; border: none; }
    </item>
    <item>
     <widget class="QLabel" name="labelRodape">
+     <property name="font">
+      <font>
+       <family>Segoe UI</family>
+       <pointsize>-1</pointsize>
+       <bold>false</bold>
+      </font>
+     </property>
      <property name="text">
-      <string>Hotel Paradise • Sistema de gerenciamento de reservas</string>
+      <string>Hotel Paradise  •  Sistema de gerenciamento de reservas</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>

@@ -16,6 +16,73 @@ TelaListagem::TelaListagem(QWidget *parent)
 {
     ui->setupUi(this);
 
+
+    // Garante o fundo branco na tela de listagem
+    setObjectName("TelaListagem");
+    setAttribute(Qt::WA_StyledBackground, true);
+
+    setStyleSheet(styleSheet() + R"(
+        QWidget#TelaListagem {
+            background-color: #F8FAFC;
+        }
+
+        QLabel#labelTitulo {
+            color: #1F2937;
+        }
+
+        QLabel#labelDescricao {
+            color: #64748B;
+        }
+
+        QLabel#labelMarca {
+            color: #B8863B;
+        }
+
+        QLabel#labelRodape {
+            color: #64748B;
+        }
+    )");
+
+
+
+    // Restaurar o botão Voltar
+    ui->btnVoltar->setStyleSheet(R"(
+    QPushButton {
+        background-color: #FFFFFF;
+        color: #334155;
+        border: 1px solid #CBD5E1;
+        border-radius: 9px;
+        padding: 10px 18px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    QPushButton:hover {
+        background-color: #F1F5F9;
+    }
+)");
+
+    ui->btnAtualizar->setStyleSheet(R"(
+    QPushButton {
+        background-color: #2563EB;
+        color: #FFFFFF;
+        border: 1px solid #2563EB;
+        border-radius: 9px;
+        padding: 10px 18px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    QPushButton:hover {
+        background-color: #1D4ED8;
+    }
+)");
+
+    // Garantir que os botões estejam visíveis
+    ui->btnVoltar->show();
+    ui->btnAtualizar->show();
+
+
     auto *tabela = ui->tabelaReservas;
     tabela->setColumnCount(9);
     tabela->setHorizontalHeaderLabels({
