@@ -96,7 +96,8 @@ bool Reserva::getStatusReserva() const
 
 void Reserva::setStatusReserva(bool statusReserva) 
 { 
-    this->statusReserva = statusReserva; 
+    this->statusReserva = statusReserva;
+    if (statusReserva) cancelada = false;
 }
 
 Reserva::Reserva() : numeroDiarias(0), valorTotal(0.0f), valorEntrada(0.0f), statusReserva(false) {}
@@ -126,5 +127,15 @@ float Reserva::calcularValores()
 
 void Reserva::confirmarPagamento()
 {
-    this->statusReserva = true;
+    if (!cancelada) {
+        this->statusReserva = true;
+    }
+}
+
+void Reserva::cancelar()
+{
+    // Uma reserva paga nunca pode ser cancelada automaticamente.
+    if (!statusReserva) {
+        cancelada = true;
+    }
 }

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1180</width>
-    <height>720</height>
+    <width>1280</width>
+    <height>728</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -24,7 +24,7 @@
     <string>QWidget#centralwidget {
     background-color: #F6F8FC;
     color: #1F2937;
-    font-family: "Segoe UI";
+    font-family: &quot;Segoe UI&quot;;
 }
 QFrame#frameFundoEscuro { background: transparent; border: none; }
 QFrame#cardConsulta, QFrame#cardLista {
@@ -117,27 +117,27 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
       </property>
       <item>
        <widget class="QLabel" name="labelMarca">
-        <property name="text">
-         <string>REDE DE HOTÉIS PARADISE</string>
-        </property>
         <property name="font">
          <font>
           <family>Segoe UI</family>
-          <pointsize>11</pointsize>
+          <pointsize>-1</pointsize>
           <bold>true</bold>
          </font>
+        </property>
+        <property name="text">
+         <string>REDE DE HOTÉIS PARADISE</string>
         </property>
        </widget>
       </item>
       <item>
        <spacer name="espacoBarraSuperior">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeType">
-         <enum>QSizePolicy::Expanding</enum>
+         <enum>QSizePolicy::Policy::Expanding</enum>
         </property>
-        <property name="sizeHint">
+        <property name="sizeHint" stdset="0">
          <size>
           <width>24</width>
           <height>12</height>
@@ -151,7 +151,7 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
          <string>SISTEMA DE GERENCIAMENTO DE RESERVAS</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignVCenter</set>
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
         </property>
        </widget>
       </item>
@@ -160,12 +160,12 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
     <item>
      <spacer name="espacoSuperior">
       <property name="orientation">
-       <enum>Qt::Vertical</enum>
+       <enum>Qt::Orientation::Vertical</enum>
       </property>
       <property name="sizeType">
-       <enum>QSizePolicy::Expanding</enum>
+       <enum>QSizePolicy::Policy::Expanding</enum>
       </property>
-      <property name="sizeHint">
+      <property name="sizeHint" stdset="0">
        <size>
         <width>12</width>
         <height>35</height>
@@ -193,12 +193,12 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
       <item>
        <spacer name="espacoEsquerda">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeType">
-         <enum>QSizePolicy::Expanding</enum>
+         <enum>QSizePolicy::Policy::Expanding</enum>
         </property>
-        <property name="sizeHint">
+        <property name="sizeHint" stdset="0">
          <size>
           <width>24</width>
           <height>12</height>
@@ -221,7 +221,7 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
          </size>
         </property>
         <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
+         <enum>QFrame::Shape::NoFrame</enum>
         </property>
         <layout class="QVBoxLayout" name="layoutConteudoPrincipal">
          <property name="spacing">
@@ -241,29 +241,29 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
          </property>
          <item>
           <widget class="QLabel" name="labelDestaque">
-           <property name="text">
-            <string>ÁREA DO ATENDENTE</string>
-           </property>
            <property name="font">
             <font>
              <family>Segoe UI</family>
-             <pointsize>9</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="text">
+            <string>ÁREA DO ATENDENTE</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="labelTitulo">
-           <property name="text">
-            <string>Menu Principal</string>
-           </property>
            <property name="font">
             <font>
              <family>Segoe UI</family>
-             <pointsize>28</pointsize>
+             <pointsize>-1</pointsize>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="text">
+            <string>Menu Principal</string>
            </property>
           </widget>
          </item>
@@ -280,12 +280,12 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
          <item>
           <spacer name="espacoPequenoCabecalho">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
            <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
+            <enum>QSizePolicy::Policy::Fixed</enum>
            </property>
-           <property name="sizeHint">
+           <property name="sizeHint" stdset="0">
             <size>
              <width>1</width>
              <height>3</height>
@@ -308,12 +308,12 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
            <item>
             <spacer name="espacoAtendente">
              <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+              <enum>Qt::Orientation::Horizontal</enum>
              </property>
              <property name="sizeType">
-              <enum>QSizePolicy::Expanding</enum>
+              <enum>QSizePolicy::Policy::Expanding</enum>
              </property>
-             <property name="sizeHint">
+             <property name="sizeHint" stdset="0">
               <size>
                <width>24</width>
                <height>12</height>
@@ -326,12 +326,12 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
          <item>
           <spacer name="espacoEntreCabecalhoECards">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
            <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
+            <enum>QSizePolicy::Policy::Fixed</enum>
            </property>
-           <property name="sizeHint">
+           <property name="sizeHint" stdset="0">
             <size>
              <width>1</width>
              <height>13</height>
@@ -353,7 +353,7 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
               </size>
              </property>
              <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
+              <enum>QFrame::Shape::NoFrame</enum>
              </property>
              <layout class="QVBoxLayout" name="layoutCartaoConsulta">
               <property name="spacing">
@@ -373,42 +373,42 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
               </property>
               <item>
                <widget class="QLabel" name="labelCategoriaConsulta">
-                <property name="text">
-                 <string>DISPONIBILIDADE E CADASTRO</string>
-                </property>
                 <property name="font">
                  <font>
                   <family>Segoe UI</family>
-                  <pointsize>9</pointsize>
+                  <pointsize>-1</pointsize>
                   <bold>true</bold>
                  </font>
+                </property>
+                <property name="text">
+                 <string>DISPONIBILIDADE E CADASTRO</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QLabel" name="labelConsultaTitulo">
-                <property name="text">
-                 <string>Consultar quartos</string>
-                </property>
                 <property name="font">
                  <font>
                   <family>Segoe UI</family>
-                  <pointsize>17</pointsize>
+                  <pointsize>-1</pointsize>
                   <bold>true</bold>
                  </font>
+                </property>
+                <property name="text">
+                 <string>Consultar quartos</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QLabel" name="labelConsultaDescricao">
-                <property name="text">
-                 <string>Verifique a ocupação dos hotéis e registre novas hospedagens.</string>
-                </property>
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
                   <height>50</height>
                  </size>
+                </property>
+                <property name="text">
+                 <string>Verifique a ocupação dos hotéis e registre novas hospedagens.</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -418,12 +418,12 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
               <item>
                <spacer name="espacoConsulta">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeType">
-                 <enum>QSizePolicy::Expanding</enum>
+                 <enum>QSizePolicy::Policy::Expanding</enum>
                 </property>
-                <property name="sizeHint">
+                <property name="sizeHint" stdset="0">
                  <size>
                   <width>12</width>
                   <height>20</height>
@@ -433,13 +433,10 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
               </item>
               <item>
                <widget class="QPushButton" name="btnConsultarReserva">
-                <property name="text">
-                 <string>Consultar disponibilidade / Realizar reserva</string>
-                </property>
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>52</height>
+                  <height>56</height>
                  </size>
                 </property>
                 <property name="maximumSize">
@@ -447,6 +444,9 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
                   <width>16777215</width>
                   <height>58</height>
                  </size>
+                </property>
+                <property name="text">
+                 <string>Consultar disponibilidade / Realizar reserva</string>
                 </property>
                </widget>
               </item>
@@ -462,7 +462,7 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
               </size>
              </property>
              <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
+              <enum>QFrame::Shape::NoFrame</enum>
              </property>
              <layout class="QVBoxLayout" name="layoutCartaoLista">
               <property name="spacing">
@@ -482,42 +482,42 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
               </property>
               <item>
                <widget class="QLabel" name="labelCategoriaLista">
-                <property name="text">
-                 <string>GESTÃO DE RESERVAS</string>
-                </property>
                 <property name="font">
                  <font>
                   <family>Segoe UI</family>
-                  <pointsize>9</pointsize>
+                  <pointsize>-1</pointsize>
                   <bold>true</bold>
                  </font>
+                </property>
+                <property name="text">
+                 <string>GESTÃO DE RESERVAS</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QLabel" name="labelListaTitulo">
-                <property name="text">
-                 <string>Reservas cadastradas</string>
-                </property>
                 <property name="font">
                  <font>
                   <family>Segoe UI</family>
-                  <pointsize>17</pointsize>
+                  <pointsize>-1</pointsize>
                   <bold>true</bold>
                  </font>
+                </property>
+                <property name="text">
+                 <string>Reservas cadastradas</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QLabel" name="labelListaDescricao">
-                <property name="text">
-                 <string>Consulte dados, acompanhe os valores e confira o status de cada reserva.</string>
-                </property>
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
                   <height>50</height>
                  </size>
+                </property>
+                <property name="text">
+                 <string>Consulte dados, acompanhe os valores e confira o status de cada reserva.</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -527,12 +527,12 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
               <item>
                <spacer name="espacoLista">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeType">
-                 <enum>QSizePolicy::Expanding</enum>
+                 <enum>QSizePolicy::Policy::Expanding</enum>
                 </property>
-                <property name="sizeHint">
+                <property name="sizeHint" stdset="0">
                  <size>
                   <width>12</width>
                   <height>20</height>
@@ -542,13 +542,10 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
               </item>
               <item>
                <widget class="QPushButton" name="btnListarReservas">
-                <property name="text">
-                 <string>Listar reservas</string>
-                </property>
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>52</height>
+                  <height>56</height>
                  </size>
                 </property>
                 <property name="maximumSize">
@@ -556,6 +553,9 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
                   <width>16777215</width>
                   <height>58</height>
                  </size>
+                </property>
+                <property name="text">
+                 <string>Listar reservas</string>
                 </property>
                </widget>
               </item>
@@ -567,12 +567,12 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
          <item>
           <spacer name="espacoAntesSair">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
            <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
+            <enum>QSizePolicy::Policy::Fixed</enum>
            </property>
-           <property name="sizeHint">
+           <property name="sizeHint" stdset="0">
             <size>
              <width>1</width>
              <height>4</height>
@@ -583,7 +583,7 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
          <item>
           <widget class="QFrame" name="frameSessao">
            <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
+            <enum>QFrame::Shape::NoFrame</enum>
            </property>
            <layout class="QHBoxLayout" name="layoutSessao">
             <property name="spacing">
@@ -608,15 +608,15 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
               </property>
               <item>
                <widget class="QLabel" name="labelSessaoTitulo">
-                <property name="text">
-                 <string>Trocar de atendente?</string>
-                </property>
                 <property name="font">
                  <font>
                   <family>Segoe UI</family>
-                  <pointsize>12</pointsize>
+                  <pointsize>-1</pointsize>
                   <bold>true</bold>
                  </font>
+                </property>
+                <property name="text">
+                 <string>Trocar de atendente?</string>
                 </property>
                </widget>
               </item>
@@ -635,12 +635,12 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
             <item>
              <spacer name="espacoSessao">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Orientation::Horizontal</enum>
               </property>
               <property name="sizeType">
-               <enum>QSizePolicy::Expanding</enum>
+               <enum>QSizePolicy::Policy::Expanding</enum>
               </property>
-              <property name="sizeHint">
+              <property name="sizeHint" stdset="0">
                <size>
                 <width>24</width>
                 <height>12</height>
@@ -650,13 +650,10 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
             </item>
             <item>
              <widget class="QPushButton" name="btnSair">
-              <property name="text">
-               <string>Sair da conta</string>
-              </property>
               <property name="minimumSize">
                <size>
                 <width>160</width>
-                <height>46</height>
+                <height>56</height>
                </size>
               </property>
               <property name="maximumSize">
@@ -664,6 +661,9 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
                 <width>195</width>
                 <height>54</height>
                </size>
+              </property>
+              <property name="text">
+               <string>Sair da conta</string>
               </property>
              </widget>
             </item>
@@ -676,12 +676,12 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
       <item>
        <spacer name="espacoDireita">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeType">
-         <enum>QSizePolicy::Expanding</enum>
+         <enum>QSizePolicy::Policy::Expanding</enum>
         </property>
-        <property name="sizeHint">
+        <property name="sizeHint" stdset="0">
          <size>
           <width>24</width>
           <height>12</height>
@@ -694,12 +694,12 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
     <item>
      <spacer name="espacoInferior">
       <property name="orientation">
-       <enum>Qt::Vertical</enum>
+       <enum>Qt::Orientation::Vertical</enum>
       </property>
       <property name="sizeType">
-       <enum>QSizePolicy::Expanding</enum>
+       <enum>QSizePolicy::Policy::Expanding</enum>
       </property>
-      <property name="sizeHint">
+      <property name="sizeHint" stdset="0">
        <size>
         <width>12</width>
         <height>35</height>
@@ -712,12 +712,12 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
       <item>
        <spacer name="espacoRodape">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeType">
-         <enum>QSizePolicy::Expanding</enum>
+         <enum>QSizePolicy::Policy::Expanding</enum>
         </property>
-        <property name="sizeHint">
+        <property name="sizeHint" stdset="0">
          <size>
           <width>24</width>
           <height>12</height>
@@ -731,7 +731,7 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
          <string>Hotel Paradise  •  Sistema de gerenciamento de reservas</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignVCenter</set>
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
         </property>
        </widget>
       </item>

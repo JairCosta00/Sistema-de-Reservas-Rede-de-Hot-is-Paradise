@@ -2,6 +2,8 @@
 #define GERENCIADORDERESERVAS_H
 
 #include <vector>
+#include <cstddef>
+#include <string>
 #include <string.h>
 #include <fstream>
 #include <algorithm>
@@ -33,6 +35,16 @@ class GerenciadorDeReservas
         // opção para confirmar alguma reserva pendente.
         void listarEConfirmarPendentes();
 
+        // Confirma um pagamento e cancela solicitações pendentes conflitantes.
+        // "canceladas" recebe os clientes afetados; "motivo" explica falhas.
+        bool confirmarPagamentoReserva(
+            std::size_t indice,
+            std::vector<std::string>* canceladas = nullptr,
+            std::string* motivo = nullptr);
+
+        // Encerrar o login sem apagar reservas.
+        void encerrarSessao();
+
         // Persistência de dados (arquivo .txt), e ordenação.
         void salvarEmArquivoTxt();
 
@@ -47,9 +59,6 @@ class GerenciadorDeReservas
 
         // Retorna todas as reservas para a tela de listagem.
         const std::vector<Reserva>& getReservas() const { return listaReservas; }
-
-        // Retorna a tela de login
-        void encerrarSessao();
 };
 
 #endif

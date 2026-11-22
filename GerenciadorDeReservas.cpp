@@ -9,6 +9,33 @@
 #include <iostream>
 #include <stdexcept>
 #include <utility>
+#include <numeric>
+
+// Compara intervalos de hospedagem [check-in, check-out),
+// considerando o mesmo hotel e tipo de quarto.
+namespace {
+bool reservasConflitam(const Reserva& a, const Reserva& b)
+{
+    if (a.getLocalidade() != b.getLocalidade() ||
+        a.getQuarto().getTipoQuarto() != b.getQuarto().getTipoQuarto()) {
+        return false;
+    }
+
+    const QDate inicioA = QDate::fromString(
+        QString::fromStdString(a.getCheckIn()), "dd/MM/yyyy");
+    const QDate inicioB = QDate::fromString(
+        QString::fromStdString(b.getCheckIn()), "dd/MM/yyyy");
+
+    if (!inicioA.isValid() || !inicioB.isValid() ||
+        a.getNumeroDiarias() <= 0 || b.getNumeroDiarias() <= 0) {
+        return false;
+    }
+
+    const QDate fimA = inicioA.addDays(a.getNumeroDiarias());
+    const QDate fimB = inicioB.addDays(b.getNumeroDiarias());
+    return inicioA < fimB && inicioB < fimA;
+}
+}
 
 // Inicialização da variável estática para o singleton
 GerenciadorDeReservas* GerenciadorDeReservas::instancia = nullptr;
@@ -102,7 +129,8 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
                 !comecaCom(linhaValores, pTotal) || posEntrada == std::string::npos ||
                 !comecaCom(linhaStatus, pStatus) ||
                 (linhaStatus != "Status: Pendente" &&
-                 linhaStatus != "Status: Confirmada") ||
+                 linhaStatus != "Status: Confirmada" &&
+                 linhaStatus != "Status: Cancelada") ||
                 !QDate::fromString(QString::fromStdString(data), "dd/MM/yyyy").isValid()) {
                 ++ignoradas;
                 continue;
@@ -141,6 +169,7 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
             reserva.setValorTotal(total);
             reserva.setValorEntrada(entrada);
             reserva.setStatusReserva(linhaStatus == "Status: Confirmada");
+            if (linhaStatus == "Status: Cancelada") reserva.cancelar();
             carregadas.push_back(reserva);
         } catch (const std::exception&) {
             ++ignoradas; // Registro antigo malformado: nao interrompe a abertura.
@@ -154,6 +183,63 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
                   << " registro(s) incompleto(s) ignorado(s) no TXT.\n";
     }
 }
+
+
+bool GerenciadorDeReservas::confirmarPagamentoReserva(
+    std::size_t indice, std::vector<std::string>* canceladas,
+    std::string* motivo)
+{
+    if (canceladas) canceladas->clear();
+    if (motivo) motivo->clear();
+
+    if (indice >= listaReservas.size()) {
+        if (motivo) *motivo = "Solicitação não encontrada.";
+        return false;
+    }
+
+    Reserva& escolhida = listaReservas[indice];
+    if (!escolhida.estaPendente()) {
+        if (motivo) *motivo = escolhida.estaCancelada()
+            ? "Esta solicitação já foi cancelada."
+            : "Esta reserva já está confirmada.";
+        return false;
+    }
+
+    // Se outro pagamento já confirmou a ocupação, não podemos aceitar
+    // a mesma hospedagem: cancela-se a solicitação ainda não paga.
+    for (std::size_t i = 0; i < listaReservas.size(); ++i) {
+        if (i != indice && listaReservas[i].getStatusReserva() &&
+            reservasConflitam(escolhida, listaReservas[i])) {
+            escolhida.cancelar();
+            salvarEmArquivoTxt();
+            if (motivo) *motivo =
+                "Solicitação cancelada: o quarto já possui uma reserva paga "
+                "para esse período.";
+            return false;
+        }
+    }
+
+    // O pagamento foi identificado: somente agora reserva efetivamente
+    // o quarto para o período solicitado.
+    escolhida.confirmarPagamento();
+
+    // Outras solicitações não pagas que se sobrepõem perdem a vaga.
+    for (std::size_t i = 0; i < listaReservas.size(); ++i) {
+        if (i == indice || !listaReservas[i].estaPendente()) continue;
+        if (reservasConflitam(escolhida, listaReservas[i])) {
+            listaReservas[i].cancelar();
+            if (canceladas) {
+                canceladas->push_back(
+                    listaReservas[i].getCliente().getNome() +
+                    " (check-in: " + listaReservas[i].getCheckIn() + ")");
+            }
+        }
+    }
+
+    salvarEmArquivoTxt();
+    return true;
+}
+
 
 bool GerenciadorDeReservas::realizarLogin(string login, string senha)
 {
@@ -198,6 +284,7 @@ bool GerenciadorDeReservas::verificarDisponibilidade(
     QDate fimNovo = inicioNovo.addDays(numeroDiarias);
 
     for (const auto& r : listaReservas) {
+        if (!r.getStatusReserva()) continue; // Pendente/cancelada não ocupa.
         if (r.getLocalidade() != local ||
             r.getQuarto().getTipoQuarto() != tipoQuarto) continue;
 
@@ -219,40 +306,44 @@ void GerenciadorDeReservas::adicionarReserva(Reserva r)
     listaReservas.push_back(r);
 }
 
-// opção para confirmar alguma reserva pendente.
+// Mantida para compatibilidade com o menu de console antigo.
 void GerenciadorDeReservas::listarEConfirmarPendentes()
 {
-    cout << "\n--- RESERVAS PENDENTES ---" << endl;
+    cout << "\n--- SOLICITACOES PENDENTES ---" << endl;
     bool encontrou = false;
-    
-    for (size_t i = 0; i < listaReservas.size(); ++i) 
-    {
-        if (listaReservas[i].getStatusReserva() == false) 
-        {
-            cout << "[" << i << "] Cliente: " << listaReservas[i].getCliente().getNome()
-                 << " | CPF: " << listaReservas[i].getCliente().getCpf()
-                 << " | Data: " << listaReservas[i].getCheckIn()
-                 << " | Valor Entrada: R$ " << listaReservas[i].getValorEntrada() << endl;
+    for (std::size_t i = 0; i < listaReservas.size(); ++i) {
+        if (listaReservas[i].estaPendente()) {
+            cout << "[" << i << "] Cliente: "
+                 << listaReservas[i].getCliente().getNome()
+                 << " | Check-in: " << listaReservas[i].getCheckIn()
+                 << " | Entrada: R$ " << listaReservas[i].getValorEntrada()
+                 << endl;
             encontrou = true;
         }
     }
-    if (!encontrou) 
-    {
-        cout << "Nao ha reservas pendentes aguardando pagamento." << endl;
+    if (!encontrou) {
+        cout << "Nao ha solicitacoes pendentes." << endl;
         return;
     }
-    int indice;
-    cout << "\nDigite o numero [ID] da reserva para confirmar o pagamento (ou -1 para cancelar): ";
-    cin >> indice;
-    // Verifica se o índice digitado é válido e se essa reserva realmente está pendente
-    if (indice >= 0 && indice < listaReservas.size() && !listaReservas[indice].getStatusReserva()) 
-    {
-        listaReservas[indice].confirmarPagamento();
-        cout << "\n[Sucesso] Pagamento confirmado! A reserva [" << indice << "] agora esta Confirmada." << endl;
-    } 
-    else if (indice != -1) 
-    {
-        cout << "\n[Erro] ID invalido." << endl;
+
+    int indice = -1;
+    cout << "Digite o indice da solicitacao paga (-1 para sair): ";
+    if (!(cin >> indice) || indice == -1) return;
+    if (indice < 0) {
+        cout << "Indice invalido." << endl;
+        return;
+    }
+
+    std::vector<std::string> canceladas;
+    std::string motivo;
+    if (!confirmarPagamentoReserva(
+            static_cast<std::size_t>(indice), &canceladas, &motivo)) {
+        cout << "Nao foi possivel confirmar: " << motivo << endl;
+        return;
+    }
+    cout << "Pagamento confirmado com sucesso." << endl;
+    for (const auto& cliente : canceladas) {
+        cout << "[Aviso] Solicitacao cancelada: " << cliente << endl;
     }
 }
 //Encerrar Sessão
@@ -264,49 +355,54 @@ void GerenciadorDeReservas::encerrarSessao()
     }
 }
 
-// 3. Persistência de dados (arquivo .txt), e ordenação.
+// 3. Persistência em TXT; ordenação só na saída, sem modificar
+// o vetor de memória (os índices são usados pela tabela de pagamento).
 void GerenciadorDeReservas::salvarEmArquivoTxt()
 {
     if (listaReservas.empty()) {
-        cout << "\nNenhuma reserva no sistema para salvar." << endl;
+        cout << "Nenhuma reserva no sistema para salvar." << endl;
         return;
     }
-    // Ordenar as reservas por data de check-in (da mais próxima para a mais distante)
-    // Como a data é DD/MM/AAAA, antes ocorree uma conversão para AAAAMMDD para comparar corretamente (sugestão do Gemini)
-    std::sort(listaReservas.begin(), listaReservas.end(), [](const Reserva& a, const Reserva& b) {
-        string dataA = a.getCheckIn();
-        string dataB = b.getCheckIn();
-        
-        if(dataA.length() == 10 && dataB.length() == 10) {  // se a data estiver no tamanho correto, 
-            string formatadaA = dataA.substr(6,4) + dataA.substr(3,2) + dataA.substr(0,2);  // quebra as strings em substrings para 
-            string formatadaB = dataB.substr(6,4) + dataB.substr(3,2) + dataB.substr(0,2);
-            return formatadaA < formatadaB;
-        }
-        return dataA < dataB; // Fallback caso digitem a data num formato estranho
+
+    // Ordena uma lista de índices, sem alterar a listaReservas.
+    std::vector<std::size_t> indices(listaReservas.size());
+    std::iota(indices.begin(), indices.end(), 0);
+    std::stable_sort(indices.begin(), indices.end(), [this](std::size_t a, std::size_t b) {
+        const QDate dataA = QDate::fromString(
+            QString::fromStdString(listaReservas[a].getCheckIn()), "dd/MM/yyyy");
+        const QDate dataB = QDate::fromString(
+            QString::fromStdString(listaReservas[b].getCheckIn()), "dd/MM/yyyy");
+        return dataA < dataB;
     });
-    // Cria e escreve no .txt
-    ofstream arquivo("reservas_paradise.txt");
-    
-    if (arquivo.is_open())
-    {
-        arquivo << "--- RELATORIO DE RESERVAS - REDE PARADISE ---\n\n";
-        
-        for (auto& r : listaReservas) 
-        {
-            arquivo << "Data Check-in: " << r.getCheckIn() << " | Diarias: " << r.getNumeroDiarias() << "\n";
-            arquivo << "Localidade: " << r.getLocalidade() << " | Quarto: " << r.getQuarto().getTipoQuarto() << "\n";
-            arquivo << "Cliente: " << r.getCliente().getNome() << " (CPF: " << r.getCliente().getCpf() << ")\n";
-            arquivo << "Atendente: " << r.getAtendente().getNome() << "\n";
-            arquivo << "Total: R$ " << r.getValorTotal() << " | Entrada (1/3): R$ " << r.getValorEntrada() << "\n";
-            arquivo << "Status: " << (r.getStatusReserva() ? "Confirmada" : "Pendente") << "\n";
-            arquivo << "--------------------------------------------------\n";
-        }
-        
-        arquivo.close();
-        cout << "\n++++++++++ Reservas ordenadas e salvas no arquivo 'reservas_paradise.txt' ++++++++++" << endl;
+
+    std::ofstream arquivo("reservas_paradise.txt", std::ios::trunc);
+    if (!arquivo.is_open()) {
+        std::cerr << "Erro ao abrir reservas_paradise.txt para escrita." << endl;
+        return;
     }
-    else
-    {
-        cout << "\nOcorreu um erro ao criar o arquivo de texto." << endl;
+
+    arquivo << "--- RELATORIO DE RESERVAS - REDE PARADISE ---\n\n";
+    for (std::size_t indice : indices) {
+        const Reserva& r = listaReservas[indice];
+        arquivo << "Data Check-in: " << r.getCheckIn()
+                << " | Diarias: " << r.getNumeroDiarias() << "\n";
+        arquivo << "Localidade: " << r.getLocalidade()
+                << " | Quarto: " << r.getQuarto().getTipoQuarto() << "\n";
+        arquivo << "Cliente: " << r.getCliente().getNome()
+                << " (CPF: " << r.getCliente().getCpf() << ")\n";
+        arquivo << "Atendente: " << r.getAtendente().getNome() << "\n";
+        arquivo << "Total: R$ " << r.getValorTotal()
+                << " | Entrada (1/3): R$ " << r.getValorEntrada() << "\n";
+        arquivo << "Status: "
+                << (r.estaCancelada() ? "Cancelada" :
+                    (r.getStatusReserva() ? "Confirmada" : "Pendente"))
+                << "\n";
+        arquivo << "--------------------------------------------------\n";
+    }
+    arquivo.close();
+    if (!arquivo) {
+        std::cerr << "Falha ao gravar todas as reservas no TXT." << endl;
+    } else {
+        cout << "Reservas salvas em reservas_paradise.txt" << endl;
     }
 }

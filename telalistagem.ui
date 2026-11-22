@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1180</width>
+    <width>1280</width>
     <height>720</height>
    </rect>
   </property>
@@ -80,6 +80,17 @@ QPushButton#btnVoltar {
 }
 QPushButton#btnVoltar:hover { background-color: #EDF2F7; }
 QPushButton#btnVoltar:pressed { background-color: #E2E8F0; }
+QPushButton#btnConfirmarPagamento {
+    color: #FFFFFF;
+    background-color: #15803D;
+    border: 1px solid #15803D;
+}
+QPushButton#btnConfirmarPagamento:hover { background-color: #166534; }
+QPushButton#btnConfirmarPagamento:disabled {
+    color: #64748B;
+    background-color: #E2E8F0;
+    border: 1px solid #CBD5E1;
+}
 QPushButton#btnAtualizar {
     color: #FFFFFF;
     background-color: #2563EB;
@@ -292,6 +303,16 @@ QTableCornerButton::section { background-color: #ECF1F7; border: none; }
          </spacer>
         </item>
         <item>
+         <widget class="QPushButton" name="btnConfirmarPagamento">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Confirmar pagamento</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="btnAtualizar">
           <property name="text">
            <string>Atualizar lista</string>
@@ -346,7 +367,7 @@ QTableCornerButton::section { background-color: #ECF1F7; border: none; }
       </font>
      </property>
      <property name="text">
-      <string>Hotel Paradise  •  Sistema de gerenciamento de reservas</string>
+      <string>Hotel Paradise • Sistema de gerenciamento de reservas</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>

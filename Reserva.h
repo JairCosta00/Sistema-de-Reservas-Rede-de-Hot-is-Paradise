@@ -22,6 +22,7 @@ class Reserva
         float valorTotal;
         float valorEntrada;
         bool statusReserva;
+        bool cancelada = false; // Solicitação cancelada por conflito
 
     public:
         Reserva();
@@ -30,6 +31,9 @@ class Reserva
 
         float calcularValores();    // calcular o valor total com base na localidade, diarias e tipo do quarto, alem dos descontos sazonais. 
         void confirmarPagamento();
+        void cancelar();
+        bool estaCancelada() const { return cancelada; }
+        bool estaPendente() const { return !statusReserva && !cancelada; }
 
     // ------------------------ GETTERS AND SETTERS ------------------------
         Cliente getCliente() const;
