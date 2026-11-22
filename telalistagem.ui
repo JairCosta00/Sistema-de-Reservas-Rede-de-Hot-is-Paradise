@@ -151,7 +151,7 @@ QTableCornerButton::section { background-color: #ECF1F7; border: none; }
      <item>
       <widget class="QPushButton" name="btnVoltar">
        <property name="text">
-        <string>Voltar ao menu principal</string>
+        <string>←  Voltar ao menu principal</string>
        </property>
       </widget>
      </item>

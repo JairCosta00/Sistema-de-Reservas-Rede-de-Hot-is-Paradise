@@ -198,13 +198,6 @@ QPushButton#btnRealizarReserva:disabled {
       <number>3</number>
      </property>
      <item>
-      <widget class="QLabel" name="labelSobretitulo">
-       <property name="text">
-        <string>CONSULTA E RESERVAS</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QLabel" name="labelTitulo">
        <property name="text">
         <string>Consultar disponibilidade</string>
@@ -255,7 +248,7 @@ QPushButton#btnRealizarReserva:disabled {
         <item>
          <widget class="QLabel" name="labelSecaoHospedagem">
           <property name="text">
-           <string>01  Dados da hospedagem</string>
+           <string>Dados da hospedagem</string>
           </property>
          </widget>
         </item>
@@ -442,7 +435,7 @@ QPushButton#btnRealizarReserva:disabled {
         <item>
          <widget class="QLabel" name="labelSecaoCliente">
           <property name="text">
-           <string>02  Dados do cliente</string>
+           <string>Dados do cliente</string>
           </property>
          </widget>
         </item>
