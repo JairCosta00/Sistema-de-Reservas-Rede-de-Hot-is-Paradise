@@ -13,6 +13,17 @@ LoginDialog::LoginDialog(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // Configuração do GIF de fundo
+    labelFundo = new QLabel(this);
+    labelFundo->setScaledContents(true); // Estica o GIF para preencher toda a tela
+
+    QString caminhoGif = QCoreApplication::applicationDirPath() + "/Resource Files/HP_AnimatedBackground.gif";
+    movieFundo = new QMovie(caminhoGif, QByteArray(), this);
+    labelFundo->setMovie(movieFundo);
+    movieFundo->start();
+
+    labelFundo->lower(); // joga o gif pra camada de trás
+
     // Configurações dos campos e botões
     ui->lineEditSenha->setEchoMode(QLineEdit::Password);
     ui->lineEditLogin->setClearButtonEnabled(true);
@@ -117,4 +128,13 @@ void LoginDialog::on_checkBoxMostrarSenha_toggled(bool checked)
 {
     ui->lineEditSenha->setEchoMode(
         checked ? QLineEdit::Normal : QLineEdit::Password);
+}
+
+// Mantém o GIF cobrindo 100% da janela se o usuário redimensionar ou maximizar
+void LoginDialog::resizeEvent(QResizeEvent *event)
+{
+    QDialog::resizeEvent(event);
+    if (labelFundo != nullptr) {
+        labelFundo->setGeometry(0, 0, width(), height());
+    }
 }

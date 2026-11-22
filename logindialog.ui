@@ -24,7 +24,7 @@ QFrame#frameCard {
     background-color: #FFFFFF;
     border: 1px solid #E2E8F0;
     border-radius: 14px;
-    padding: 0px;
+    padding: 28px 32px;
 }
 
 /* Título do Hotel */
@@ -90,8 +90,11 @@ QPushButton#pushButtonEntrar:pressed {
 
 /* Texto de versão no rodapé */
 QLabel#labelTituloEVersao {
-    color: #94A3B8;
-    font-size: 11px;
+    color: #FFFFFF;
+    background-color: rgba(15, 23, 42, 0.55);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;;
 }
 
 /* Subtítulo do formulário */
@@ -302,7 +305,7 @@ QLabel#labelMensagem {
    <item>
     <widget class="QLabel" name="labelTituloEVersao">
      <property name="text">
-      <string>Hotel Paradise V1.0.2 (21-11-26)</string>
+      <string>Hotel Paradise V1.1.2 (22-11-26)</string>
      </property>
     </widget>
    </item>
