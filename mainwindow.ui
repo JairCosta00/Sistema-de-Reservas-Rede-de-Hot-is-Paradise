@@ -116,6 +116,22 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
        <number>0</number>
       </property>
       <item>
+       <spacer name="espacoBarraSuperior">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>18</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="QLabel" name="labelMarca">
         <property name="font">
          <font>
@@ -126,32 +142,6 @@ QPushButton#btnSair:pressed { background-color: #FEE2E2; }
         </property>
         <property name="text">
          <string>REDE DE HOTÉIS PARADISE</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="espacoBarraSuperior">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Policy::Expanding</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>24</width>
-          <height>12</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="labelSistema">
-        <property name="text">
-         <string>SISTEMA DE GERENCIAMENTO DE RESERVAS</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
         </property>
        </widget>
       </item>

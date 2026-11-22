@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1280</width>
-    <height>720</height>
+    <height>710</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -135,7 +135,7 @@ QTableCornerButton::section { background-color: #ECF1F7; border: none; }
     <number>34</number>
    </property>
    <property name="topMargin">
-    <number>26</number>
+    <number>25</number>
    </property>
    <property name="rightMargin">
     <number>34</number>
@@ -165,8 +165,8 @@ QTableCornerButton::section { background-color: #ECF1F7; border: none; }
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>20</width>
-         <height>5</height>
+         <width>18</width>
+         <height>18</height>
         </size>
        </property>
       </spacer>
