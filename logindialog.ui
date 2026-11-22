@@ -24,7 +24,7 @@ QFrame#frameCard {
     background-color: #FFFFFF;
     border: 1px solid #E2E8F0;
     border-radius: 14px;
-    padding: 28px 32px;
+    padding: 0px;
 }
 
 /* Título do Hotel */
@@ -32,7 +32,7 @@ QLabel#labelTelaNomeHotel {
     color: #0F172A;
     font-size: 22px;
     font-weight: bold;
-    margin-bottom: 14px;
+    margin-bottom: 2px;
 }
 
 /* Rótulos &quot;Login:&quot; e &quot;Senha:&quot; */
@@ -92,7 +92,26 @@ QPushButton#pushButtonEntrar:pressed {
 QLabel#labelTituloEVersao {
     color: #94A3B8;
     font-size: 11px;
-}</string>
+}
+
+/* Subtítulo do formulário */
+QLabel#labelInstrucao {
+    color: #64748B;
+    background: transparent;
+    font-size: 12px;
+    margin-bottom: 14px;
+}
+
+/* Aviso discreto abaixo do botão Entrar */
+QLabel#labelMensagem {
+    color: #B42318;
+    background: transparent;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    padding-top: 5px;
+}
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -133,7 +152,7 @@ QLabel#labelTituloEVersao {
        </property>
        <property name="maximumSize">
         <size>
-         <width>420</width>
+         <width>450</width>
          <height>16777215</height>
         </size>
        </property>
@@ -144,31 +163,62 @@ QLabel#labelTituloEVersao {
         <enum>QFrame::Shadow::Raised</enum>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>10</number>
+        </property>
+        <property name="leftMargin">
+         <number>30</number>
+        </property>
+        <property name="topMargin">
+         <number>28</number>
+        </property>
+        <property name="rightMargin">
+         <number>30</number>
+        </property>
+        <property name="bottomMargin">
+         <number>28</number>
+        </property>
         <item>
          <widget class="QLabel" name="labelTelaNomeHotel">
           <property name="text">
            <string>Hotel Paradise</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelInstrucao">
+          <property name="text">
+           <string>Entre com suas credenciais para continuar</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="labelLogin">
           <property name="text">
-           <string>Login:</string>
+           <string>Usuário</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLineEdit" name="lineEditLogin">
           <property name="placeholderText">
-           <string>Digite seu Login</string>
+           <string>Digite seu usuário</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="labelSenha">
           <property name="text">
-           <string>Senha:</string>
+           <string>Senha</string>
           </property>
          </widget>
         </item>
@@ -178,7 +228,7 @@ QLabel#labelTituloEVersao {
            <enum>QLineEdit::EchoMode::Password</enum>
           </property>
           <property name="placeholderText">
-           <string>Digite sua Senha</string>
+           <string>Digite sua senha</string>
           </property>
          </widget>
         </item>
@@ -192,9 +242,28 @@ QLabel#labelTituloEVersao {
         <item>
          <widget class="QPushButton" name="pushButtonEntrar">
           <property name="text">
-           <string>Fazer Login</string>
+           <string>Entrar</string>
           </property>
           <property name="default">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelMensagem">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
            <bool>true</bool>
           </property>
          </widget>
@@ -233,7 +302,7 @@ QLabel#labelTituloEVersao {
    <item>
     <widget class="QLabel" name="labelTituloEVersao">
      <property name="text">
-      <string>Hotel Paradise V1.0.0 (21-11-26)</string>
+      <string>Hotel Paradise V1.0.2 (21-11-26)</string>
      </property>
     </widget>
    </item>

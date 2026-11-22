@@ -100,62 +100,47 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->btnSair, &QPushButton::clicked,
             this, [this]() {
 
-                auto resposta = QMessageBox::question(
-                    this,
-                    "Sair da conta",
-                    "Deseja sair da conta e voltar ao login?",
-                    QMessageBox::Yes | QMessageBox::No,
-                    QMessageBox::No
-                    );
+                auto* gerenciador =
+                    GerenciadorDeReservas::getInstancia();
 
-                if (resposta == QMessageBox::Yes) {
+                // Salva as reservas existentes
+                gerenciador->salvarEmArquivoTxt();
 
-                    auto* gerenciador =
-                        GerenciadorDeReservas::getInstancia();
+                // Desconecta o atendente atual
+                gerenciador->encerrarSessao();
 
-                    // Salva as reservas existentes
-                    gerenciador->salvarEmArquivoTxt();
+                // Evita que o aplicativo encerre durante a troca
+                QApplication::setQuitOnLastWindowClosed(false);
 
-                    // Desconecta o atendente atual
-                    gerenciador->encerrarSessao();
+                // Esconde o menu principal
+                this->hide();
 
-                    // Evita que o aplicativo encerre
-                    // durante a troca de telas
-                    QApplication::setQuitOnLastWindowClosed(false);
+                // Abre novamente a tela de login
+                LoginDialog login;
 
-                    // Esconde o menu principal
-                    this->hide();
+                if (login.exec() == QDialog::Accepted) {
 
-                    // Abre novamente a tela de login
-                    LoginDialog login;
+                    // Recupera o novo atendente
+                    Atendente* atendente =
+                        gerenciador->getAtendenteLogado();
 
-                    if (login.exec() == QDialog::Accepted) {
-
-                        // Recupera o novo atendente
-                        Atendente* atendente =
-                            gerenciador->getAtendenteLogado();
-
-                        if (atendente != nullptr) {
-                            ui->labelAtendente->setText(
-                                "Atendente: " +
-                                QString::fromStdString(
-                                    atendente->getNome()
-                                    )
-                                );
-                        }
-
-                        // Mostra o menu principal novamente
-                        this->showMaximized();
-
-                        QApplication::setQuitOnLastWindowClosed(true);
-
-                    } else {
-                        // Encerra se o login for cancelado
-                        QApplication::quit();
+                    if (atendente != nullptr) {
+                        ui->labelAtendente->setText(
+                            "Atendente: " +
+                            QString::fromStdString(atendente->getNome())
+                            );
                     }
+
+                    // Retorna ao menu principal
+                    this->showMaximized();
+
+                    QApplication::setQuitOnLastWindowClosed(true);
+
+                } else {
+                    // Encerra se o login for cancelado
+                    QApplication::quit();
                 }
             });
-
 
     // Botão Listar Reservas
     connect(ui->btnListarReservas,
