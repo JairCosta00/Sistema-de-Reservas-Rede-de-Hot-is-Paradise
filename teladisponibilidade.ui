@@ -494,7 +494,7 @@ QPushButton#btnRealizarReserva:disabled {
              </sizepolicy>
             </property>
             <property name="maxLength">
-             <number>14</number>
+             <number>11</number>
             </property>
             <property name="placeholderText">
              <string>11 dígitos</string>
