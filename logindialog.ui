@@ -14,25 +14,30 @@
    <string>Hotel Paradise - Login</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">/* Fundo geral da janela */
+   <string notr="true">/* deep-green: #20251F - Bordas*/
+/* dourado fosco: #B49A70 - Borda Destaque (contraste claro)*/
+/* bright-sand: #E8E0D2 */
+/* Off-white: #F7F5EF - Backgroud */
+/* Paradise Green: #263326 - Destaques / Hover */
+
+/* Fundo geral da janela */
 QDialog#LoginDialog {
     background-color: #F1F5F9;
 }
 
 /* Cartão branco central */
 QFrame#frameCard {
-    background-color: #FFFFFF;
-    border: 1px solid #E2E8F0;
+    background-color: #F7F5EF;
+    border: 1px solid #20251F;
     border-radius: 14px;
     padding: 28px 32px;
 }
 
 /* Título do Hotel */
 QLabel#labelTelaNomeHotel {
-    color: #0F172A;
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 2px;
+    background: transparent;
+    border: none;
+    margin-bottom: 6px;
 }
 
 /* Rótulos &quot;Login:&quot; e &quot;Senha:&quot; */
@@ -50,14 +55,14 @@ QLineEdit {
     font-size: 14px;
     color: #1E293B;
     background-color: #F8FAFC;
-    border: 1.5px solid #CBD5E1;
+    border: 1.5px solid #B49A70;	
     border-radius: 8px;
 }
 
 /* Destaque ao clicar para digitar */
 QLineEdit:focus {
     background-color: #FFFFFF;
-    border: 1.5px solid #0284C7;
+    border: 1.5px solid #263326;
 }
 
 /* Checkbox Mostrar Senha */
@@ -74,18 +79,18 @@ QPushButton#pushButtonEntrar {
     min-height: 42px;
     font-size: 14px;
     font-weight: bold;
-    color: #FFFFFF;
-    background-color: #0284C7;
+    color: #F7F5EF;
+    background-color: #263326;
     border: none;
     border-radius: 8px;
 }
 
 QPushButton#pushButtonEntrar:hover {
-    background-color: #0369A1;
+    background-color: #20251F;
 }
 
 QPushButton#pushButtonEntrar:pressed {
-    background-color: #075985;
+    background-color: #20251F;
 }
 
 /* Texto de versão no rodapé */
@@ -305,7 +310,7 @@ QLabel#labelMensagem {
    <item>
     <widget class="QLabel" name="labelTituloEVersao">
      <property name="text">
-      <string>Hotel Paradise V1.1.2 (22-11-26)</string>
+      <string>Hotel Paradise V1.2.2 (23-11-26)</string>
      </property>
     </widget>
    </item>

@@ -6,6 +6,8 @@
 #include <QPushButton>
 #include <QString>
 #include <QTimer>
+#include <QCoreApplication>
+#include <QPixmap>
 
 LoginDialog::LoginDialog(QWidget *parent)
     : QDialog(parent)
@@ -17,12 +19,21 @@ LoginDialog::LoginDialog(QWidget *parent)
     labelFundo = new QLabel(this);
     labelFundo->setScaledContents(true); // Estica o GIF para preencher toda a tela
 
-    QString caminhoGif = QCoreApplication::applicationDirPath() + "/Resource Files/HP_AnimatedBackground.gif";
-    movieFundo = new QMovie(caminhoGif, QByteArray(), this);
+    QString ResourceDir = QCoreApplication::applicationDirPath() + "/Resource Files/";
+    movieFundo = new QMovie(ResourceDir + "HP_AnimatedBackground2.gif", QByteArray(), this);
     labelFundo->setMovie(movieFundo);
     movieFundo->start();
-
     labelFundo->lower(); // joga o gif pra camada de trás
+
+    // Carrega a logo no lugar do texto "Hotel Paradise"
+    QPixmap logo(ResourceDir + "HP_Logo_GreenNoBackground.png");
+    ui->labelTelaNomeHotel->setAlignment(Qt::AlignCenter);
+    if (!logo.isNull()) {
+        // Ajusta para caber na largura do card
+        ui->labelTelaNomeHotel->setPixmap(
+            logo.scaled(260, 110, Qt::KeepAspectRatio, Qt::SmoothTransformation)
+            );
+    }
 
     // Configurações dos campos e botões
     ui->lineEditSenha->setEchoMode(QLineEdit::Password);

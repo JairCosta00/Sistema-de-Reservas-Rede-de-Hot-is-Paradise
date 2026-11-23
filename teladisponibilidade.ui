@@ -20,88 +20,115 @@
    <string>Hotel Paradise - Consultar disponibilidade</string>
   </property>
   <property name="styleSheet">
-   <string>QDialog#TelaDisponibilidade {
-    background: #F5F7FB;
-    font-family: &quot;Segoe UI&quot;;
-    color: #14243D;
+   <string notr="true">/* deep-green: #20251F - Fundo principal e campos */
+/* Paradise Green: #263326 - Cartões */
+/* Green: #3B543B - Bordas secundárias e botão de confirmação */
+/* dourado fosco: #B49A70 - Bordas de destaque e foco */
+/* Off-white: #F7F5EF - Títulos e botão principal */
+/* bright-sand: #E8E0D2 - Descrições e hover */
+
+QDialog#TelaDisponibilidade {
+    background-color: #20251F;
+    color: #F7F5EF;
 }
+
 QFrame#cardHospedagem, QFrame#cardCliente, QFrame#cardAcoes {
-    background: #FFFFFF;
-    border: 1px solid #E1E7F0;
+    background-color: #263326;
+    border: 1.5px solid #B49A70;
     border-radius: 14px;
 }
+
 QLabel {
     background: transparent;
     border: none;
-    color: #334155;
+    color: #E8E0D2;
     font-size: 13px;
 }
+
 QLabel#labelMarca {
-    color: #AA7730;
+    color: #B49A70;
     font-size: 13px;
     font-weight: bold;
 }
+
 QLabel#labelSobretitulo {
-    color: #AA7730;
+    color: #B49A70;
     font-size: 11px;
     font-weight: bold;
 }
+
 QLabel#labelTitulo {
-    color: #122039;
+    color: #F7F5EF;
     font-size: 31px;
     font-weight: bold;
 }
+
 QLabel#labelDescricao, QLabel#labelAjudaHospedagem, QLabel#labelAjudaCliente {
-    color: #64748B;
+    color: #E8E0D2;
     font-size: 13px;
 }
+
 QLabel#labelSecaoHospedagem, QLabel#labelSecaoCliente {
-    color: #13243C;
+    color: #F7F5EF;
     font-size: 19px;
     font-weight: bold;
 }
+
 QLabel#labelStatusTitulo {
-    color: #13243C;
+    color: #F7F5EF;
     font-size: 17px;
     font-weight: bold;
 }
+
+/* Caixas de dica e resultado da consulta */
 QLabel#labelDica {
-    color: #64748B;
-    background: #F1F5F9;
-    border: 1px solid #E2E8F0;
+    color: #E8E0D2;
+    background-color: #20251F;
+    border: 1px solid #3B543B;
     border-radius: 8px;
     padding: 11px 12px;
     font-size: 12px;
 }
+
 QLabel#labelResultado {
-    color: #64748B;
-    background: #F1F5F9;
-    border: 1px solid #E2E8F0;
+    color: #E8E0D2;
+    background-color: #20251F;
+    border: 1px solid #B49A70;
     border-radius: 9px;
     padding: 12px;
     font-size: 13px;
 }
+
 QLabel#labelRodape {
-    color: #94A3B8;
+    color: #B49A70;
     font-size: 11px;
 }
+
+/* Campos de entrada */
 QLineEdit, QComboBox, QDateEdit, QSpinBox {
-    background: #FFFFFF;
-    color: #15243A;
-    border: 1px solid #CBD5E1;
+    background-color: #20251F;
+    color: #F7F5EF;
+    border: 1.5px solid #3B543B;
     border-radius: 8px;
     padding: 9px 12px;
     min-height: 28px;
     font-size: 13px;
 }
+
 QLineEdit:focus, QComboBox:focus, QDateEdit:focus, QSpinBox:focus {
-    border: 1px solid #2563EB;
+    border: 1.5px solid #B49A70;
 }
+
+/* Lista suspensa do QComboBox em modo escuro */
 QComboBox QAbstractItemView {
-    background: #FFFFFF;
-    color: #15243A;
-    selection-background-color: #DBEAFE;
+    background-color: #20251F;
+    color: #F7F5EF;
+    border: 1px solid #B49A70;
+    selection-background-color: #3B543B;
+    selection-color: #F7F5EF;
 }
+
+/* Botões */
 QPushButton {
     min-height: 24px;
     border-radius: 9px;
@@ -109,28 +136,49 @@ QPushButton {
     font-size: 13px;
     font-weight: bold;
 }
+
 QPushButton#btnVoltar {
-    background: #FFFFFF;
-    border: 1px solid #CBD5E1;
-    color: #334155;
+    background-color: #263326;
+    border: 1px solid #B49A70;
+    color: #F7F5EF;
 }
-QPushButton#btnVoltar:hover { background: #F1F5F9; }
+QPushButton#btnVoltar:hover {
+    background-color: #3B543B;
+}
+QPushButton#btnVoltar:pressed {
+    background-color: #20251F;
+}
+
+/* Botão principal de consulta (Off-white invertido) */
 QPushButton#btnConsultar {
-    background: #2563EB;
-    color: #FFFFFF;
-    border: 1px solid #2563EB;
+    background-color: #F7F5EF;
+    color: #20251F;
+    border: 1.5px solid #B49A70;
 }
-QPushButton#btnConsultar:hover { background: #1D4ED8; }
+QPushButton#btnConsultar:hover {
+    background-color: #E8E0D2;
+}
+QPushButton#btnConsultar:pressed {
+    background-color: #B49A70;
+    color: #20251F;
+}
+
+/* Botão de confirmação de reserva (Green da paleta) */
 QPushButton#btnRealizarReserva {
-    background: #16834A;
-    color: #FFFFFF;
-    border: 1px solid #16834A;
+    background-color: #3B543B;
+    color: #F7F5EF;
+    border: 1.5px solid #B49A70;
 }
-QPushButton#btnRealizarReserva:hover { background: #166534; }
+QPushButton#btnRealizarReserva:hover {
+    background-color: #496849;
+}
+QPushButton#btnRealizarReserva:pressed {
+    background-color: #263326;
+}
 QPushButton#btnRealizarReserva:disabled {
-    background: #E5E7EB;
-    color: #64748B;
-    border: 1px solid #D1D5DB;
+    background-color: #20251F;
+    color: #6E776C;
+    border: 1px solid #3B543B;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="layoutPrincipal">
@@ -633,7 +681,7 @@ QPushButton#btnRealizarReserva:disabled {
           <property name="minimumSize">
            <size>
             <width>195</width>
-            <height>46</height>
+            <height>48</height>
            </size>
           </property>
           <property name="cursor">
@@ -652,7 +700,7 @@ QPushButton#btnRealizarReserva:disabled {
           <property name="minimumSize">
            <size>
             <width>158</width>
-            <height>46</height>
+            <height>48</height>
            </size>
           </property>
           <property name="cursor">

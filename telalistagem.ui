@@ -20,52 +20,69 @@
    <string>Hotel Paradise - Listar reservas</string>
   </property>
   <property name="styleSheet">
-   <string>QWidget#TelaListagem {
-    background-color: #F6F8FC;
-    color: #1F2937;
-    font-family: &quot;Segoe UI&quot;;
+   <string notr="true">/* deep-green: #20251F - Fundo principal e linhas da tabela */
+/* Paradise Green: #263326 - Cartão da tabela e linhas alternadas */
+/* Green: #3B543B - Grades e botão confirmar pagamento */
+/* dourado fosco: #B49A70 - Bordas de destaque, cabeçalho e seleção */
+/* Off-white: #F7F5EF - Títulos, textos da tabela e botão atualizar */
+/* bright-sand: #E8E0D2 - Descrições e hover */
+
+QWidget#TelaListagem {
+    background-color: #20251F;
+    color: #F7F5EF;
 }
+
 QFrame#frameTabela {
-    background-color: #FFFFFF;
-    border: 1px solid #DFE5ED;
+    background-color: #263326;
+    border: 1.5px solid #B49A70;
     border-radius: 15px;
 }
+
 QLabel {
     background: transparent;
     border: none;
-    color: #1F2937;
+    color: #E8E0D2;
 }
+
 QLabel#labelMarca {
-    color: #AD7F35;
+    color: #B49A70;
     font-size: 13px;
     font-weight: bold;
 }
+
 QLabel#labelTitulo {
-    color: #152238;
+    color: #F7F5EF;
     font-size: 31px;
     font-weight: 700;
 }
+
 QLabel#labelDescricao {
-    color: #64748B;
+    color: #E8E0D2;
     font-size: 13px;
 }
+
+/* Contador de reservas cadastradas */
 QLabel#labelTotal {
-    color: #1D4ED8;
-    background-color: #EFF6FF;
-    border: 1px solid #BFDBFE;
+    color: #F7F5EF;
+    background-color: #20251F;
+    border: 1px solid #B49A70;
     border-radius: 9px;
     padding: 9px 13px;
     font-size: 13px;
     font-weight: bold;
 }
+
 QLabel#labelVazio {
-    color: #64748B;
+    color: #E8E0D2;
     font-size: 13px;
 }
+
 QLabel#labelRodape {
-    color: #94A3B8;
+    color: #B49A70;
     font-size: 11px;
 }
+
+/* Botões */
 QPushButton {
     border-radius: 9px;
     padding: 10px 18px;
@@ -73,59 +90,89 @@ QPushButton {
     font-weight: bold;
     min-height: 20px;
 }
+
 QPushButton#btnVoltar {
-    color: #334155;
-    background-color: #FFFFFF;
-    border: 1px solid #CAD5E3;
+    color: #F7F5EF;
+    background-color: #263326;
+    border: 1px solid #B49A70;
 }
-QPushButton#btnVoltar:hover { background-color: #EDF2F7; }
-QPushButton#btnVoltar:pressed { background-color: #E2E8F0; }
+QPushButton#btnVoltar:hover {
+    background-color: #3B543B;
+}
+QPushButton#btnVoltar:pressed {
+    background-color: #20251F;
+}
+
+/* Botão confirmar pagamento (Green da paleta) */
 QPushButton#btnConfirmarPagamento {
-    color: #FFFFFF;
-    background-color: #15803D;
-    border: 1px solid #15803D;
+    color: #F7F5EF;
+    background-color: #3B543B;
+    border: 1.5px solid #B49A70;
 }
-QPushButton#btnConfirmarPagamento:hover { background-color: #166534; }
+QPushButton#btnConfirmarPagamento:hover {
+    background-color: #496849;
+}
+QPushButton#btnConfirmarPagamento:pressed {
+    background-color: #263326;
+}
 QPushButton#btnConfirmarPagamento:disabled {
-    color: #64748B;
-    background-color: #E2E8F0;
-    border: 1px solid #CBD5E1;
+    color: #6E776C;
+    background-color: #20251F;
+    border: 1px solid #3B543B;
 }
+
+/* Botão atualizar lista (Off-white invertido) */
 QPushButton#btnAtualizar {
-    color: #FFFFFF;
-    background-color: #2563EB;
-    border: 1px solid #2563EB;
+    color: #20251F;
+    background-color: #F7F5EF;
+    border: 1.5px solid #B49A70;
 }
-QPushButton#btnAtualizar:hover { background-color: #1D4ED8; }
-QPushButton#btnAtualizar:pressed { background-color: #1E40AF; }
+QPushButton#btnAtualizar:hover {
+    background-color: #E8E0D2;
+}
+QPushButton#btnAtualizar:pressed {
+    background-color: #B49A70;
+    color: #20251F;
+}
+
+/* Tabela de reservas */
 QTableWidget#tabelaReservas {
-    background-color: #FFFFFF;
-    alternate-background-color: #FAFCFF;
-    color: #243247;
-    border: 1px solid #DFE5ED;
+    background-color: #20251F;
+    alternate-background-color: #263326;
+    color: #F7F5EF;
+    border: 1px solid #3B543B;
     border-radius: 8px;
-    gridline-color: #EDF2F7;
-    selection-background-color: #DBEAFE;
-    selection-color: #152238;
+    gridline-color: #3B543B;
+    selection-background-color: #B49A70;
+    selection-color: #20251F;
     font-size: 13px;
     outline: none;
 }
+
 QTableWidget#tabelaReservas::item {
     padding: 8px 6px;
-    border-bottom: 1px solid #EDF2F7;
+    border-bottom: 1px solid #3B543B;
 }
-QTableWidget#tabelaReservas::item:hover { background-color: #EFF6FF; }
+
+QTableWidget#tabelaReservas::item:hover {
+    background-color: #3B543B;
+    color: #F7F5EF;
+}
+
 QHeaderView::section {
-    background-color: #ECF1F7;
-    color: #334155;
+    background-color: #20251F;
+    color: #B49A70;
     border: none;
-    border-bottom: 1px solid #D9E1EC;
+    border-bottom: 1.5px solid #B49A70;
     padding: 13px 9px;
     font-weight: bold;
     font-size: 12px;
 }
-QTableCornerButton::section { background-color: #ECF1F7; border: none; }
-</string>
+
+QTableCornerButton::section {
+    background-color: #20251F;
+    border: none;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="layoutPrincipal">
    <property name="spacing">

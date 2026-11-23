@@ -12,6 +12,7 @@
 #include <QPushButton>
 #include <QRegularExpression>
 #include <QSpinBox>
+#include <QCoreApplication>
 
 #include <memory>
 
@@ -22,6 +23,17 @@ TelaDisponibilidade::TelaDisponibilidade(QWidget *parent)
     ui->dataCheckin->setMinimumDate(QDate::currentDate());
     ui->dataCheckin->setDate(QDate::currentDate());
     ui->btnRealizarReserva->setEnabled(false);
+
+    setAttribute(Qt::WA_StyledBackground, true);
+
+    QString ResourceDir =
+        QCoreApplication::applicationDirPath() + "/Resource Files/";
+
+    setStyleSheet(
+        styleSheet() +
+        QString("QDialog#TelaDisponibilidade { border-image: url(\"%1\") 0 0 0 0 stretch stretch; }")
+            .arg(ResourceDir + "GreenBackground2")
+        );
 
     // Qualquer alteração na pesquisa exige verificar novamente.
     auto limparConsulta = [this]() {

@@ -10,12 +10,32 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QCoreApplication>
+#include <QPixmap>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // Carrega a logo na barra superior substituindo o texto de labelMarca
+    const QString ResourceDir =
+        QCoreApplication::applicationDirPath() + "/Resource Files/";
+    QPixmap logo(ResourceDir + "HP_Logo_GoldenNoBackground.png");
+
+    ui->centralwidget->setStyleSheet(
+        ui->centralwidget->styleSheet() +
+        QString("QWidget#centralwidget { border-image: url(\"%1\") 0 0 0 0 stretch stretch; }")
+            .arg(ResourceDir + "GreenBackground3.jpg")
+        );
+
+    if (!logo.isNull()) {
+        // Ajusta a altura para 48px mantendo a proporção original para caber bem na barra superior
+        ui->labelMarca->setPixmap(
+            logo.scaledToHeight(54, Qt::SmoothTransformation)
+            );
+    }
 
     // Configuração da janela
     setWindowFlags(Qt::Window |

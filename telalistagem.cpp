@@ -12,6 +12,7 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QTableWidgetItem>
+#include <QCoreApplication>
 
 // Mantém a ordenação correta das datas no formato dd/MM/yyyy.
 class ItemDataCheckin : public QTableWidgetItem
@@ -36,64 +37,18 @@ TelaListagem::TelaListagem(QWidget *parent)
     ui->setupUi(this);
 
     setObjectName("TelaListagem");
+
     setAttribute(Qt::WA_StyledBackground, true);
-    setStyleSheet(styleSheet() + R"(
-        QWidget#TelaListagem {
-            background-color: #F8FAFC;
-        }
-        QLabel#labelTitulo { color: #1F2937; }
-        QLabel#labelDescricao { color: #64748B; }
-        QLabel#labelMarca { color: #B8863B; }
-        QLabel#labelRodape { color: #64748B; }
-    )");
+    QString ResourceDir =
+        QCoreApplication::applicationDirPath() + "/Resource Files/";
 
-    // Mantém o visual do botão Voltar.
-    ui->btnVoltar->setStyleSheet(R"(
-        QPushButton {
-            background-color: #FFFFFF;
-            color: #334155;
-            border: 1px solid #CBD5E1;
-            border-radius: 9px;
-            padding: 10px 18px;
-            font-size: 13px;
-            font-weight: bold;
-        }
-        QPushButton:hover { background-color: #F1F5F9; }
-    )");
+    setStyleSheet(
+        styleSheet() +
+        QString("QWidget#TelaListagem { border-image: url(\"%1\") 0 0 0 0 stretch stretch; }")
+            .arg(ResourceDir + "GreenBackground")
+        );
 
-    // Mantém o visual do botão Atualizar.
-    ui->btnAtualizar->setStyleSheet(R"(
-        QPushButton {
-            background-color: #2563EB;
-            color: #FFFFFF;
-            border: 1px solid #2563EB;
-            border-radius: 9px;
-            padding: 10px 18px;
-            font-size: 13px;
-            font-weight: bold;
-        }
-        QPushButton:hover { background-color: #1D4ED8; }
-    )");
-
-    // Botão novo: só pode confirmar uma reserva pendente selecionada.
     ui->btnConfirmarPagamento->setEnabled(false);
-    ui->btnConfirmarPagamento->setStyleSheet(R"(
-        QPushButton {
-            background-color: #15803D;
-            color: #FFFFFF;
-            border: 1px solid #15803D;
-            border-radius: 9px;
-            padding: 10px 18px;
-            font-size: 13px;
-            font-weight: bold;
-        }
-        QPushButton:hover { background-color: #166534; }
-        QPushButton:disabled {
-            background-color: #E2E8F0;
-            color: #64748B;
-            border: 1px solid #CBD5E1;
-        }
-    )");
 
     auto *tabela = ui->tabelaReservas;
     tabela->setColumnCount(9);
