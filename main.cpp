@@ -23,10 +23,15 @@ int main(int argc, char *argv[])
     }
 
     // Ícone do Hotel Paradise
-    a.setWindowIcon(QIcon(ResourceDir + "HP_Logo_GreenNoBackground"));
+    a.setWindowIcon(QIcon(ResourceDir + "HP_Logo_GoldenNoBackground"));
 
-    LoginDialog login;
-    if (login.exec() == QDialog::Accepted) {
+    bool autenticado = false;   // variavel de controle.
+    {   // garante que a tela de login é destuida após o login.
+        LoginDialog login;
+        autenticado = (login.exec() == QDialog::Accepted);
+    }
+
+    if (autenticado) {
         MainWindow w;
         w.show();
         return a.exec();
