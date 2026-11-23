@@ -372,7 +372,7 @@ QTableCornerButton::section {
    <item>
     <widget class="QLabel" name="labelRodape">
      <property name="text">
-      <string>Hotel Paradise • Sistema de gerenciamento de reservas</string>
+      <string>Sistema de gerenciamento de reservas</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>

@@ -310,7 +310,7 @@ QLabel#labelMensagem {
    <item>
     <widget class="QLabel" name="labelTituloEVersao">
      <property name="text">
-      <string>Hotel Paradise V1.4.0 (23-11-26)</string>
+      <string>Hotel Paradise V1.4.5 (23-11-26)</string>
      </property>
     </widget>
    </item>

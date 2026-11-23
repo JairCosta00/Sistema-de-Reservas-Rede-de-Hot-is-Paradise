@@ -45,7 +45,7 @@ TelaListagem::TelaListagem(QWidget *parent)
     setStyleSheet(
         styleSheet() +
         QString("QWidget#TelaListagem { border-image: url(\"%1\") 0 0 0 0 stretch stretch; }")
-            .arg(ResourceDir + "GreenBackground")
+            .arg(ResourceDir + "GreenBackground5")
         );
 
     ui->btnConfirmarPagamento->setEnabled(false);

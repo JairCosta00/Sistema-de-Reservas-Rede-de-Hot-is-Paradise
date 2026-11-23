@@ -32,7 +32,7 @@ TelaDisponibilidade::TelaDisponibilidade(QWidget *parent)
     setStyleSheet(
         styleSheet() +
         QString("QDialog#TelaDisponibilidade { border-image: url(\"%1\") 0 0 0 0 stretch stretch; }")
-            .arg(ResourceDir + "GreenBackground2")
+            .arg(ResourceDir + "GreenBackground7")
         );
 
     // Qualquer alteração na pesquisa exige verificar novamente.
