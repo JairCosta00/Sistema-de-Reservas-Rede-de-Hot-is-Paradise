@@ -21,107 +21,43 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
-    <string notr="true">/* deep-green: #20251F - Fundo principal */
-/* Paradise Green: #263326 - Fundo dos cartões */
-/* dourado fosco: #B49A70 - Bordas de destaque e categorias */
-/* Off-white: #F7F5EF - Títulos e botões principais */
-/* bright-sand: #E8E0D2 - Textos secundários e hover */
-
-QWidget#centralwidget {
-    background-color: #20251F;
-    color: #F7F5EF;
+    <string>QWidget#centralwidget {
+    background-color: #F6F8FC;
+    color: #1F2937;
+    font-family: &quot;Segoe UI&quot;;
 }
-
-QFrame#frameFundoEscuro {
-    background: transparent;
-    border: none;
-}
-
-/* Cartões centrais em Paradise Green com borda dourada */
+QFrame#frameFundoEscuro { background: transparent; border: none; }
 QFrame#cardConsulta, QFrame#cardLista {
-    background-color: #263326;
-    border: 1.5px solid #B49A70;
+    background-color: #FFFFFF;
+    border: 1px solid #DFE5ED;
     border-radius: 15px;
 }
-
-/* Cartão inferior de sessão */
 QFrame#frameSessao {
-    background-color: #263326;
-    border: 1px solid #3B543B;
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
     border-radius: 12px;
 }
-
-QLabel {
-    background: transparent;
-    border: none;
-    color: #E8E0D2;
-}
-
-/* Rótulos de marca e categoria em dourado fosco */
-QLabel#labelMarca {
-    color: #B49A70;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-QLabel#labelSistema {
-    color: #E8E0D2;
-    font-size: 12px;
-}
-
+QLabel { background: transparent; border: none; color: #334155; }
+QLabel#labelMarca { color: #AD7F35; font-size: 13px; font-weight: bold; }
+QLabel#labelSistema { color: #64748B; font-size: 12px; }
 QLabel#labelDestaque, QLabel#labelCategoriaConsulta, QLabel#labelCategoriaLista {
-    color: #B49A70;
-    font-size: 11px;
-    font-weight: bold;
+    color: #AD7F35; font-size: 11px; font-weight: bold;
 }
-
-/* Títulos em Off-white */
-QLabel#labelTitulo {
-    color: #F7F5EF;
-    font-size: 34px;
-    font-weight: bold;
-}
-
-QLabel#labelConsultaTitulo, QLabel#labelListaTitulo {
-    color: #F7F5EF;
-    font-size: 21px;
-    font-weight: bold;
-}
-
-QLabel#labelSessaoTitulo {
-    color: #F7F5EF;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-/* Descrições em Bright-sand */
-QLabel#labelDescricao {
-    color: #E8E0D2;
-    font-size: 14px;
-}
-
-QLabel#labelConsultaDescricao, QLabel#labelListaDescricao, QLabel#labelSessaoDescricao {
-    color: #E8E0D2;
-    font-size: 13px;
-}
-
-/* Crachá do atendente */
+QLabel#labelTitulo { color: #152238; font-size: 34px; font-weight: bold; }
+QLabel#labelDescricao { color: #64748B; font-size: 14px; }
 QLabel#labelAtendente {
-    color: #F7F5EF;
-    background-color: #263326;
-    border: 1.5px solid #B49A70;
-    border-radius: 9px;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 10px 15px;
+    color: #1D4ED8; background-color: #EFF6FF;
+    border: 1px solid #BFDBFE; border-radius: 9px;
+    font-size: 13px; font-weight: bold; padding: 10px 15px;
 }
-
-QLabel#labelRodape {
-    color: #B49A70;
-    font-size: 11px;
+QLabel#labelConsultaTitulo, QLabel#labelListaTitulo {
+    color: #17243A; font-size: 21px; font-weight: bold;
 }
-
-/* Botões principais invertidos */
+QLabel#labelConsultaDescricao, QLabel#labelListaDescricao, QLabel#labelSessaoDescricao {
+    color: #64748B; font-size: 13px;
+}
+QLabel#labelSessaoTitulo { color: #243247; font-size: 14px; font-weight: bold; }
+QLabel#labelRodape { color: #94A3B8; font-size: 11px; }
 QPushButton {
     border-radius: 10px;
     padding: 12px 18px;
@@ -129,41 +65,22 @@ QPushButton {
     font-size: 13px;
     font-weight: bold;
 }
-
-QPushButton#btnConsultarReserva, QPushButton#btnListarReservas {
-    background-color: #F7F5EF;
-    color: #20251F;
-    border: 1.5px solid #B49A70;
+QPushButton#btnConsultarReserva {
+    background-color: #2563EB; color: white; border: 1px solid #2563EB;
 }
-
-QPushButton#btnConsultarReserva:hover, QPushButton#btnListarReservas:hover {
-    background-color: #E8E0D2;
-    color: #20251F;
-    border: 1.5px solid #B49A70;
+QPushButton#btnConsultarReserva:hover { background-color: #1D4ED8; }
+QPushButton#btnConsultarReserva:pressed { background-color: #1E40AF; }
+QPushButton#btnListarReservas {
+    background-color: #FFFFFF; color: #1D4ED8; border: 1px solid #93C5FD;
 }
-
-QPushButton#btnConsultarReserva:pressed, QPushButton#btnListarReservas:pressed {
-    background-color: #B49A70;
-    color: #20251F;
-}
-
-/* Botão Sair adaptado para fundo escuro */
+QPushButton#btnListarReservas:hover { background-color: #EFF6FF; }
+QPushButton#btnListarReservas:pressed { background-color: #DBEAFE; }
 QPushButton#btnSair {
-    background-color: #20251F;
-    color: #FCA5A5;
-    border: 1px solid #991B1B;
+    background-color: #FFFFFF; color: #B91C1C; border: 1px solid #FECACA;
 }
-
-QPushButton#btnSair:hover {
-    background-color: #450A0A;
-    color: #FEE2E2;
-    border: 1px solid #EF4444;
-}
-
-QPushButton#btnSair:pressed {
-    background-color: #7F1D1D;
-    color: #FFFFFF;
-}</string>
+QPushButton#btnSair:hover { background-color: #FEF2F2; border: 1px solid #EF4444; }
+QPushButton#btnSair:pressed { background-color: #FEE2E2; }
+</string>
    </property>
    <layout class="QVBoxLayout" name="layoutJanela">
     <property name="spacing">
@@ -199,6 +116,22 @@ QPushButton#btnSair:pressed {
        <number>0</number>
       </property>
       <item>
+       <spacer name="espacoBarraSuperior">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Policy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>18</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="QLabel" name="labelMarca">
         <property name="font">
          <font>
@@ -209,36 +142,6 @@ QPushButton#btnSair:pressed {
         </property>
         <property name="text">
          <string>REDE DE HOTÉIS PARADISE</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="espacoBarraSuperior">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Policy::Expanding</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>24</width>
-          <height>12</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="labelDestaque">
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>-1</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>ÁREA DO ATENDENTE</string>
         </property>
        </widget>
       </item>
@@ -327,6 +230,20 @@ QPushButton#btnSair:pressed {
           <number>0</number>
          </property>
          <item>
+          <widget class="QLabel" name="labelDestaque">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>-1</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>ÁREA DO ATENDENTE</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QLabel" name="labelTitulo">
            <property name="font">
             <font>
@@ -371,19 +288,6 @@ QPushButton#btnSair:pressed {
            <property name="spacing">
             <number>0</number>
            </property>
-           <item>
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Orientation::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
            <item>
             <widget class="QLabel" name="labelAtendente">
              <property name="text">
@@ -522,7 +426,7 @@ QPushButton#btnSair:pressed {
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>58</height>
+                  <height>56</height>
                  </size>
                 </property>
                 <property name="maximumSize">
@@ -631,7 +535,7 @@ QPushButton#btnSair:pressed {
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
-                  <height>58</height>
+                  <height>56</height>
                  </size>
                 </property>
                 <property name="maximumSize">
