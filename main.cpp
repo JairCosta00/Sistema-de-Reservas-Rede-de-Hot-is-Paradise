@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     }
 
     // Ícone do Hotel Paradise
-    a.setWindowIcon(QIcon(ResourceDir + "HP_Logo_GreenBackground"));
+    a.setWindowIcon(QIcon(ResourceDir + "AppIcon")); //HP_Logo_OffwhiteBackground
 
     bool autenticado = false;   // variavel de controle.
     {   // garante que a tela de login é destuida após o login.

@@ -32,7 +32,7 @@ TelaDisponibilidade::TelaDisponibilidade(QWidget *parent)
     setStyleSheet(
         styleSheet() +
         QString("QDialog#TelaDisponibilidade { border-image: url(\"%1\") 0 0 0 0 stretch stretch; }")
-            .arg(ResourceDir + "GreenBackground7")
+            .arg(ResourceDir + "Background_TelaDisponibilidade.jpg")    // OLD: GreenBackground7
         );
 
     // Qualquer alteração na pesquisa exige verificar novamente.
@@ -331,7 +331,6 @@ TelaDisponibilidade::TelaDisponibilidade(QWidget *parent)
         color: #0F172A;
         background: transparent;
         font-size: 13px;
-        font-family: "Segoe UI";
     }
 
     QPushButton#btnFechar {

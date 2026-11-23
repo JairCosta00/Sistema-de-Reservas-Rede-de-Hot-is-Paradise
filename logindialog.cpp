@@ -20,7 +20,7 @@ LoginDialog::LoginDialog(QWidget *parent)
     labelFundo->setScaledContents(true); // Estica o GIF para preencher toda a tela
 
     QString ResourceDir = QCoreApplication::applicationDirPath() + "/Resource Files/";
-    movieFundo = new QMovie(ResourceDir + "HP_AnimatedBackground2.gif", QByteArray(), this);
+    movieFundo = new QMovie(ResourceDir + "LoginAnimatedBackground.gif", QByteArray(), this);
     labelFundo->setMovie(movieFundo);
     movieFundo->start();
     labelFundo->lower(); // joga o gif pra camada de trás

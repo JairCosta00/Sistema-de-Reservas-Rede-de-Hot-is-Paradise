@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->centralwidget->setStyleSheet(
         ui->centralwidget->styleSheet() +
         QString("QWidget#centralwidget { border-image: url(\"%1\") 0 0 0 0 stretch stretch; }")
-            .arg(ResourceDir + "GreenBackground8.jpg")  // old: GreenBackground5.jpg
+            .arg(ResourceDir + "MainwindowBackground.jpg")  // old: GreenBackground5.jpg
         );
 
     if (!logo.isNull()) {
