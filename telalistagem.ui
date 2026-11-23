@@ -220,13 +220,6 @@ QTableCornerButton::section {
      </item>
      <item>
       <widget class="QLabel" name="labelMarca">
-       <property name="font">
-        <font>
-         <family>Segoe UI</family>
-         <pointsize>-1</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
        <property name="text">
         <string>REDE DE HOTÉIS PARADISE</string>
        </property>
@@ -256,13 +249,6 @@ QTableCornerButton::section {
      </property>
      <item>
       <widget class="QLabel" name="labelTitulo">
-       <property name="font">
-        <font>
-         <family>Segoe UI</family>
-         <pointsize>-1</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
        <property name="text">
         <string>Reservas cadastradas</string>
        </property>
@@ -273,13 +259,6 @@ QTableCornerButton::section {
      </item>
      <item>
       <widget class="QLabel" name="labelDescricao">
-       <property name="font">
-        <font>
-         <family>Segoe UI</family>
-         <pointsize>-1</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
        <property name="text">
         <string>Consulte os dados das hospedagens e acompanhe o status das reservas.</string>
        </property>
@@ -318,13 +297,6 @@ QTableCornerButton::section {
         </property>
         <item>
          <widget class="QLabel" name="labelTotal">
-          <property name="font">
-           <font>
-            <family>Segoe UI</family>
-            <pointsize>-1</pointsize>
-            <bold>true</bold>
-           </font>
-          </property>
           <property name="text">
            <string>0 reservas cadastradas</string>
           </property>
@@ -386,13 +358,6 @@ QTableCornerButton::section {
       </item>
       <item>
        <widget class="QLabel" name="labelVazio">
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>-1</pointsize>
-          <bold>false</bold>
-         </font>
-        </property>
         <property name="text">
          <string>Nenhuma reserva cadastrada nesta execução.</string>
         </property>
@@ -406,13 +371,6 @@ QTableCornerButton::section {
    </item>
    <item>
     <widget class="QLabel" name="labelRodape">
-     <property name="font">
-      <font>
-       <family>Segoe UI</family>
-       <pointsize>-1</pointsize>
-       <bold>false</bold>
-      </font>
-     </property>
      <property name="text">
       <string>Hotel Paradise • Sistema de gerenciamento de reservas</string>
      </property>

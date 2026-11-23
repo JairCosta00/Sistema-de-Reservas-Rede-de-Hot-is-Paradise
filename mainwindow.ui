@@ -200,13 +200,6 @@ QPushButton#btnSair:pressed {
       </property>
       <item>
        <widget class="QLabel" name="labelDestaque">
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>-1</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
         <property name="text">
          <string>ÁREA DO ATENDENTE</string>
         </property>
@@ -230,13 +223,6 @@ QPushButton#btnSair:pressed {
       </item>
       <item>
        <widget class="QLabel" name="labelMarca">
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>-1</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
         <property name="text">
          <string>REDE DE HOTÉIS PARADISE</string>
         </property>
@@ -328,13 +314,6 @@ QPushButton#btnSair:pressed {
          </property>
          <item>
           <widget class="QLabel" name="labelTitulo">
-           <property name="font">
-            <font>
-             <family>Segoe UI</family>
-             <pointsize>-1</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
            <property name="text">
             <string>Menu Principal</string>
            </property>
@@ -446,13 +425,6 @@ QPushButton#btnSair:pressed {
               </property>
               <item>
                <widget class="QLabel" name="labelCategoriaConsulta">
-                <property name="font">
-                 <font>
-                  <family>Segoe UI</family>
-                  <pointsize>-1</pointsize>
-                  <bold>true</bold>
-                 </font>
-                </property>
                 <property name="text">
                  <string>DISPONIBILIDADE E CADASTRO</string>
                 </property>
@@ -460,13 +432,6 @@ QPushButton#btnSair:pressed {
               </item>
               <item>
                <widget class="QLabel" name="labelConsultaTitulo">
-                <property name="font">
-                 <font>
-                  <family>Segoe UI</family>
-                  <pointsize>-1</pointsize>
-                  <bold>true</bold>
-                 </font>
-                </property>
                 <property name="text">
                  <string>Consultar quartos</string>
                 </property>
@@ -555,13 +520,6 @@ QPushButton#btnSair:pressed {
               </property>
               <item>
                <widget class="QLabel" name="labelCategoriaLista">
-                <property name="font">
-                 <font>
-                  <family>Segoe UI</family>
-                  <pointsize>-1</pointsize>
-                  <bold>true</bold>
-                 </font>
-                </property>
                 <property name="text">
                  <string>GESTÃO DE RESERVAS</string>
                 </property>
@@ -569,13 +527,6 @@ QPushButton#btnSair:pressed {
               </item>
               <item>
                <widget class="QLabel" name="labelListaTitulo">
-                <property name="font">
-                 <font>
-                  <family>Segoe UI</family>
-                  <pointsize>-1</pointsize>
-                  <bold>true</bold>
-                 </font>
-                </property>
                 <property name="text">
                  <string>Reservas cadastradas</string>
                 </property>
@@ -681,13 +632,6 @@ QPushButton#btnSair:pressed {
               </property>
               <item>
                <widget class="QLabel" name="labelSessaoTitulo">
-                <property name="font">
-                 <font>
-                  <family>Segoe UI</family>
-                  <pointsize>-1</pointsize>
-                  <bold>true</bold>
-                 </font>
-                </property>
                 <property name="text">
                  <string>Trocar de atendente?</string>
                 </property>
