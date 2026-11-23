@@ -154,9 +154,22 @@ QTableWidget#tabelaReservas::item {
     border-bottom: 1px solid #3B543B;
 }
 
+/* Mouse sobre uma reserva */
 QTableWidget#tabelaReservas::item:hover {
     background-color: #3B543B;
     color: #F7F5EF;
+}
+
+/* Reserva selecionada: dourado claro */
+QTableWidget#tabelaReservas::item:selected {
+    background-color: #E8C99E;
+    color: #20251F;
+}
+
+/* Mouse sobre a reserva selecionada */
+QTableWidget#tabelaReservas::item:selected:hover {
+    background-color: #A9B99D;
+    color: #20251F;
 }
 
 QHeaderView::section {
