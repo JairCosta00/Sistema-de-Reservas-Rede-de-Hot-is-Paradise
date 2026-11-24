@@ -5,10 +5,13 @@
 #include <QCoreApplication>
 #include <QFont>
 #include <QFontDatabase>
+#include <QPixmapCache>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    QPixmapCache::setCacheLimit(15360); // limite global de cache para itens QPixMap: 15Mb
 
     // Carrega as fontes embutidas na pasta Resource Files
     const QString ResourceDir = QCoreApplication::applicationDirPath() + "/Resource Files/";
