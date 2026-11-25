@@ -21,6 +21,7 @@ TelaDisponibilidade::TelaDisponibilidade(QWidget *parent)
 {
     ui->setupUi(this);
     ui->dataCheckin->setMinimumDate(QDate::currentDate());
+    ui->dataCheckin->setMaximumDate(QDate::currentDate().addMonths(12));
     ui->dataCheckin->setDate(QDate::currentDate());
     ui->btnRealizarReserva->setEnabled(false);
 
