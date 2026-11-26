@@ -2,13 +2,14 @@
 #define ATENDENTE_H
 
 #include <iostream>
+#include <string>
+#include "Pessoa.h"
 
 using namespace std;
 
-class Atendente
+class Atendente : public Pessoa
 {
     protected:
-        string nome;
         string login;
         string senha;
         bool autenticado;
@@ -19,20 +20,13 @@ class Atendente
         // ~Atendente();
         void autenticar(string senhaDigitada);
 
-        string getNome() const;
-
-        void setNome(string nome);
-
         string getSenha() const;
-
         void setSenha(string senha);
 
         string getLogin() const;
-
         void setLogin(string login);
 
         bool getAutenticado() const;
-
         void setAutenticado(bool autenticado);
 };
 

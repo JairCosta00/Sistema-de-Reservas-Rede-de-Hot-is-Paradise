@@ -51,10 +51,10 @@ TelaListagem::TelaListagem(QWidget *parent)
     ui->btnConfirmarPagamento->setEnabled(false);
 
     auto *tabela = ui->tabelaReservas;
-    tabela->setColumnCount(9);
+    tabela->setColumnCount(10);
     tabela->setHorizontalHeaderLabels({
         "Cliente", "CPF", "Hotel", "Check-in", "Diárias",
-        "Quarto", "Atendente", "Valor total", "Status"
+        "Quarto", "Atendente","Desconto", "Valor total", "Status"
     });
     tabela->setEditTriggers(QAbstractItemView::NoEditTriggers);
     tabela->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -66,14 +66,14 @@ TelaListagem::TelaListagem(QWidget *parent)
     tabela->horizontalHeader()->setStretchLastSection(true);
     tabela->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-    tabela->setColumnWidth(0, 170);
-    tabela->setColumnWidth(1, 135);
-    tabela->setColumnWidth(2, 155);
-    tabela->setColumnWidth(3, 105);
-    tabela->setColumnWidth(4, 80);
-    tabela->setColumnWidth(5, 105);
-    tabela->setColumnWidth(6, 120);
-    tabela->setColumnWidth(7, 130);
+    tabela->setColumnWidth(0, 155);
+    tabela->setColumnWidth(1, 120);
+    tabela->setColumnWidth(2, 135);
+    tabela->setColumnWidth(3, 95);
+    tabela->setColumnWidth(4, 65);
+    tabela->setColumnWidth(5, 90);
+    tabela->setColumnWidth(6, 110);
+    tabela->setColumnWidth(7, 155);
     tabela->setColumnWidth(8, 115);
 
     connect(ui->btnVoltar, &QPushButton::clicked,
@@ -218,57 +218,85 @@ TelaListagem::~TelaListagem()
 
 void TelaListagem::atualizarLista()
 {
+    // =========================================================================
+    // ETAPA 1: PREPARAÇÃO DA TABELA E CONSULTA AO SINGLETON
+    // =========================================================================
     const auto& reservas = GerenciadorDeReservas::getInstancia()->getReservas();
     auto *tabela = ui->tabelaReservas;
 
+    // Desativa a ordenação automática durante a inserção para evitar que as linhas
+    // mudem de posição no meio do preenchimento
     tabela->setSortingEnabled(false);
     tabela->clearContents();
     tabela->setRowCount(static_cast<int>(reservas.size()));
 
     const QLocale moeda(QLocale::Portuguese, QLocale::Brazil);
 
+    // =========================================================================
+    // ETAPA 2: PREENCHIMENTO DAS 10 COLUNAS DE CADA RESERVA
+    // =========================================================================
     for (int linha = 0; linha < static_cast<int>(reservas.size()); ++linha) {
         const Reserva& reserva = reservas[static_cast<std::size_t>(linha)];
 
+        // Função auxiliar para criar e inserir células de texto simples
         auto adicionarCelula = [tabela, linha](int coluna, const QString& valor) {
             auto *item = new QTableWidgetItem(valor);
             tabela->setItem(linha, coluna, item);
             return item;
         };
 
-        // Guarda o índice original da reserva nesta célula para uso após a ordenação.
+        // Coluna 0: Nome do cliente + índice original no vetor (Qt::UserRole)
+        // para identificar a reserva exata mesmo após a tabela ser ordenada por data
         QTableWidgetItem* itemCliente = adicionarCelula(
             0, QString::fromStdString(reserva.getCliente().getNome())
-        );
+            );
         itemCliente->setData(Qt::UserRole, linha);
 
+        // Colunas 1 a 6: Dados cadastrais e da hospedagem
         adicionarCelula(1, QString::fromStdString(reserva.getCliente().getCpf()));
         adicionarCelula(2, QString::fromStdString(reserva.getLocalidade()));
         tabela->setItem(linha, 3,
-            new ItemDataCheckin(QString::fromStdString(reserva.getCheckIn())));
+                        new ItemDataCheckin(QString::fromStdString(reserva.getCheckIn())));
         adicionarCelula(4, QString::number(reserva.getNumeroDiarias()));
         adicionarCelula(5, QString::fromStdString(reserva.getQuarto().getTipoQuarto()));
         adicionarCelula(6, QString::fromStdString(reserva.getAtendente().getNome()));
-        adicionarCelula(7, moeda.toCurrencyString(static_cast<double>(reserva.getValorTotal())));
 
+        // Coluna 7 (Nova): Política de desconto aplicada (padrão Strategy)
+        adicionarCelula(7, QString::fromStdString(reserva.getDescricaoDesconto()));
+
+        // Coluna 8: Valor total formatado em Reais (R$)
+        adicionarCelula(8, moeda.toCurrencyString(static_cast<double>(reserva.getValorTotal())));
+
+        // Coluna 9: Status visual com cores de alto contraste para o fundo escuro
         const bool confirmada = reserva.getStatusReserva();
         const bool cancelada = reserva.estaCancelada();
-        auto *status = adicionarCelula(8,
-            cancelada ? "Cancelada" : (confirmada ? "Confirmada" : "Pendente"));
-        status->setForeground(QBrush(QColor(cancelada ? "#B91C1C" :
-                                              (confirmada ? "#15803D" : "#B45309"))));
+
+        auto *status = adicionarCelula(9,
+                                       cancelada ? "Cancelada" : (confirmada ? "Confirmada" : "Pendente"));
+
+        status->setForeground(QBrush(QColor(
+            cancelada  ? "#F87171" :   // Vermelho claro (Cancelada)
+                confirmada ? "#4ADE80" :   // Verde claro (Confirmada)
+                "#FBBF24"     // Amarelo âmbar (Pendente)
+            )));
+
         QFont fonte = status->font();
         fonte.setBold(true);
         status->setFont(fonte);
     }
 
+    // =========================================================================
+    // ETAPA 3: CONTADORES, ORDENAÇÃO POR CHECK-IN E RESET DE SELEÇÃO
+    // =========================================================================
     const int quantidade = static_cast<int>(reservas.size());
     ui->labelTotal->setText(
         QString::number(quantidade) +
         (quantidade == 1 ? " reserva cadastrada" : " reservas cadastradas")
-    );
+        );
     ui->labelVazio->setVisible(reservas.empty());
 
+    // Reativa a ordenação e organiza da data de check-in mais próxima (coluna 3)
+    // para a mais distante
     tabela->setSortingEnabled(true);
     tabela->sortItems(3, Qt::AscendingOrder);
     tabela->clearSelection();

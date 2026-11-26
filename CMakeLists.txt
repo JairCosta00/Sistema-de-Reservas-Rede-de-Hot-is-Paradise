@@ -8,6 +8,7 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 # ensure windows-mac compatibility
 if(MSVC)
     add_compile_options(/utf-8)
@@ -22,6 +23,8 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        Pessoa.h
+        Pessoa.cpp
         Atendente.h
         Atendente.cpp
         Cliente.h
@@ -48,6 +51,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(HotelSystem
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        Pessoa.h
+        Pessoa.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET HotelSystem APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

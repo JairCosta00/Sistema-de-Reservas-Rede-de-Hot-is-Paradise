@@ -55,23 +55,29 @@ GerenciadorDeReservas::GerenciadorDeReservas()
     carregarDeArquivoTxt();
 }
 
-// Le o relatorio TXT existente e restaura os objetos de Reserva.
-// Mantem compatibilidade com o formato gerado por salvarEmArquivoTxt().
+// Lê o relatório TXT existente e restaura os objetos de Reserva na memória.
+// Mantém compatibilidade tanto com o formato novo (com Desconto) quanto com arquivos antigos.
 void GerenciadorDeReservas::carregarDeArquivoTxt()
 {
+    // =========================================================================
+    // ETAPA 1: ABERTURA DO ARQUIVO E FUNÇÕES AUXILIARES DE TEXTO
+    // =========================================================================
     std::ifstream arquivo("reservas_paradise.txt");
     if (!arquivo.is_open()) {
-        return; // Primeira execucao: ainda nao existe historico.
+        return; // Primeira execução do sistema: ainda não existe histórico salvo.
     }
 
+    // Remove o caractere '\r' caso o arquivo tenha sido salvo no Windows (CRLF)
     auto removerCR = [](std::string& linha) {
         if (!linha.empty() && linha.back() == '\r') linha.pop_back();
     };
 
+    // Verifica se a linha começa exatamente com um prefixo esperado
     auto comecaCom = [](const std::string& texto, const std::string& prefixo) {
         return texto.rfind(prefixo, 0) == 0;
     };
 
+    // Extrai o trecho de texto situado entre um prefixo inicial e um separador
     auto entre = [](const std::string& linha, const std::string& prefixo,
                     const std::string& separador) -> std::string {
         if (linha.rfind(prefixo, 0) != 0) return {};
@@ -80,32 +86,42 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
         return linha.substr(prefixo.size(), fim - prefixo.size());
     };
 
-    const std::string pData = "Data Check-in: ";
-    const std::string pDiarias = " | Diarias: ";
-    const std::string pHotel = "Localidade: ";
-    const std::string pQuarto = " | Quarto: ";
-    const std::string pCliente = "Cliente: ";
-    const std::string pCpf = " (CPF: ";
+    // =========================================================================
+    // ETAPA 2: ÂNCORAS (RÓTULOS) ESPERADAS EM CADA BLOCO DE RESERVA DO TXT
+    // =========================================================================
+    const std::string pData      = "Data Check-in: ";
+    const std::string pDiarias   = " | Diarias: ";
+    const std::string pHotel     = "Localidade: ";
+    const std::string pQuarto    = " | Quarto: ";
+    const std::string pCliente   = "Cliente: ";
+    const std::string pCpf       = " (CPF: ";
     const std::string pAtendente = "Atendente: ";
-    const std::string pTotal = "Total: R$ ";
-    const std::string pEntrada = " | Entrada (1/3): R$ ";
-    const std::string pStatus = "Status: ";
+    const std::string pTotal     = "Total: R$ ";
+    const std::string pEntrada   = " | Entrada (1/3): R$ ";
+    const std::string pDesconto  = " | Desconto: "; // Novo campo adicionado
+    const std::string pStatus    = "Status: ";
 
     std::vector<Reserva> carregadas;
     std::string linha;
     int ignoradas = 0;
 
+    // =========================================================================
+    // ETAPA 3: LEITURA SEQUENCIAL DOS BLOCOS DE 6 LINHAS POR RESERVA
+    // =========================================================================
     while (std::getline(arquivo, linha)) {
         removerCR(linha);
+
+        // Ignora cabeçalhos, linhas em branco e separadores "------" até achar uma reserva
         if (!comecaCom(linha, pData)) continue;
 
+        // Lê as 5 linhas seguintes que compõem o registro completo daquela reserva
         std::string linhaHotel, linhaCliente, linhaAtendente, linhaValores, linhaStatus;
         if (!std::getline(arquivo, linhaHotel) ||
             !std::getline(arquivo, linhaCliente) ||
             !std::getline(arquivo, linhaAtendente) ||
             !std::getline(arquivo, linhaValores) ||
             !std::getline(arquivo, linhaStatus)) {
-            ++ignoradas;
+            ++ignoradas; // Arquivo terminou no meio de um bloco
             break;
         }
         removerCR(linhaHotel);
@@ -115,13 +131,18 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
         removerCR(linhaStatus);
 
         try {
-            std::string data = entre(linha, pData, pDiarias);
+            // =================================================================
+            // ETAPA 4: EXTRAÇÃO E VALIDAÇÃO DOS CAMPOS BRUTOS
+            // =================================================================
+            std::string data   = entre(linha, pData, pDiarias);
             std::string numero = linha.substr(linha.find(pDiarias) + pDiarias.size());
-            std::string hotel = entre(linhaHotel, pHotel, pQuarto);
-            std::string tipo = linhaHotel.substr(linhaHotel.find(pQuarto) + pQuarto.size());
+            std::string hotel  = entre(linhaHotel, pHotel, pQuarto);
+            std::string tipo   = linhaHotel.substr(linhaHotel.find(pQuarto) + pQuarto.size());
 
-            const auto posCpf = linhaCliente.rfind(pCpf);
+            const auto posCpf     = linhaCliente.rfind(pCpf);
             const auto posEntrada = linhaValores.find(pEntrada);
+
+            // Garante que todos os prefixos obrigatórios e a data sejam válidos
             if (data.empty() || hotel.empty() || tipo.empty() ||
                 !comecaCom(linhaCliente, pCliente) || posCpf == std::string::npos ||
                 linhaCliente.back() != ')' ||
@@ -143,18 +164,39 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
                 linhaCliente.size() - (posCpf + pCpf.size()) - 1);
             std::string nomeAtendente = linhaAtendente.substr(pAtendente.size());
 
+            // Converte números de diárias e valor total
             int diarias = std::stoi(numero);
             float total = std::stof(linhaValores.substr(
                 pTotal.size(), posEntrada - pTotal.size()));
-            float entrada = std::stof(linhaValores.substr(
-                posEntrada + pEntrada.size()));
+
+            // Extrai o valor da entrada e, se existir na linha, a descrição do desconto
+            const auto posDesconto = linhaValores.find(pDesconto, posEntrada);
+            float entrada = 0.0f;
+            std::string descStr = "Sem desconto (0%)";
+
+            if (posDesconto != std::string::npos) {
+                // Formato novo: "Total: R$ X | Entrada (1/3): R$ Y | Desconto: Z"
+                entrada = std::stof(linhaValores.substr(
+                    posEntrada + pEntrada.size(),
+                    posDesconto - (posEntrada + pEntrada.size())));
+                descStr = linhaValores.substr(posDesconto + pDesconto.size());
+            } else {
+                // Retrocompatibilidade: arquivos antigos sem o campo "| Desconto: "
+                entrada = std::stof(linhaValores.substr(
+                    posEntrada + pEntrada.size()));
+            }
+
+            // Valida consistência numérica e textos obrigatórios
             if (diarias <= 0 || total < 0 || entrada < 0 ||
                 nomeCliente.empty() || cpf.empty() || nomeAtendente.empty()) {
                 ++ignoradas;
                 continue;
             }
 
-            // Conserva o nome de quem criou a reserva, inclusive no historico.
+            // =================================================================
+            // ETAPA 5: RECONSTRUÇÃO DOS OBJETOS DE DOMÍNIO (OO + STRATEGY)
+            // =================================================================
+            // Busca o objeto Atendente correspondente na lista cadastrada
             Atendente responsavel(nomeAtendente, "", "");
             for (const auto& atendente : listaAtendentes) {
                 if (atendente.getNome() == nomeAtendente) {
@@ -163,19 +205,38 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
                 }
             }
 
-            // O valor original e recuperado, sem reaplicar o desconto.
+            // Instancia a estratégia de desconto correspondente ao texto salvo
+            std::shared_ptr<EstrategiaDesconto> estrategia = std::make_shared<SemDesconto>();
+            if (descStr.find("VIP") != std::string::npos) {
+                estrategia = std::make_shared<DescontoVIP>();
+            } else if (descStr.find("Baixa temporada") != std::string::npos) {
+                estrategia = std::make_shared<DescontoBaixaTemporada>();
+            } else if (descStr.find("Promocional") != std::string::npos) {
+                estrategia = std::make_shared<DescontoPromocional>();
+            }
+
+            // Monta a Reserva restaurando os valores exatos gravados (sem recalcular)
             Reserva reserva(Cliente(nomeCliente, cpf), responsavel,
-                           Quarto(tipo, 0.0f), hotel, data, diarias);
+                            Quarto(tipo, 0.0f), hotel, data, diarias);
+            reserva.setEstrategiaDesconto(estrategia);
             reserva.setValorTotal(total);
             reserva.setValorEntrada(entrada);
             reserva.setStatusReserva(linhaStatus == "Status: Confirmada");
-            if (linhaStatus == "Status: Cancelada") reserva.cancelar();
-            carregadas.push_back(reserva);
+            if (linhaStatus == "Status: Cancelada") {
+                reserva.cancelar();
+            }
+
+            carregadas.push_back(std::move(reserva));
+
         } catch (const std::exception&) {
-            ++ignoradas; // Registro antigo malformado: nao interrompe a abertura.
+            // Protege a inicialização contra linhas corrompidas ou malformadas
+            ++ignoradas;
         }
     }
 
+    // =========================================================================
+    // ETAPA 6: ATUALIZAÇÃO DO VETOR PRINCIPAL EM MEMÓRIA
+    // =========================================================================
     listaReservas = std::move(carregadas);
     std::cout << "Reservas carregadas: " << listaReservas.size() << '\n';
     if (ignoradas > 0) {
@@ -183,7 +244,6 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
                   << " registro(s) incompleto(s) ignorado(s) no TXT.\n";
     }
 }
-
 
 bool GerenciadorDeReservas::confirmarPagamentoReserva(
     std::size_t indice, std::vector<std::string>* canceladas,
@@ -239,7 +299,6 @@ bool GerenciadorDeReservas::confirmarPagamentoReserva(
     salvarEmArquivoTxt();
     return true;
 }
-
 
 bool GerenciadorDeReservas::realizarLogin(string login, string senha)
 {
@@ -392,7 +451,8 @@ void GerenciadorDeReservas::salvarEmArquivoTxt()
                 << " (CPF: " << r.getCliente().getCpf() << ")\n";
         arquivo << "Atendente: " << r.getAtendente().getNome() << "\n";
         arquivo << "Total: R$ " << r.getValorTotal()
-                << " | Entrada (1/3): R$ " << r.getValorEntrada() << "\n";
+                << " | Entrada (1/3): R$ " << r.getValorEntrada()
+                << " | Desconto: " << r.getDescricaoDesconto() << "\n";
         arquivo << "Status: "
                 << (r.estaCancelada() ? "Cancelada" :
                     (r.getStatusReserva() ? "Confirmada" : "Pendente"))

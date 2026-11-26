@@ -1,14 +1,14 @@
 #ifndef CLIENTE_H
 #define CLIENTE_H
 
+#include "Pessoa.h"
 #include <string>
 
 using namespace std;
 
-class Cliente
+class Cliente : public Pessoa
 {
     protected:
-        string nome;
         string cpf;
         
     public:
@@ -16,12 +16,7 @@ class Cliente
         Cliente(string nome, string cpf);
         // ~Cliente();
 
-        string getNome() const;
-        
-        void setNome(string nome);
-
         string getCpf() const;
-        
         void setCpf(string cpf);
 };
 

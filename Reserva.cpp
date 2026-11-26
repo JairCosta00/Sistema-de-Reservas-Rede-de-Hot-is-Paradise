@@ -139,3 +139,10 @@ void Reserva::cancelar()
         cancelada = true;
     }
 }
+
+string Reserva::getDescricaoDesconto() const
+{
+    return (estrategiaDesconto != nullptr)
+    ? estrategiaDesconto->getDescricao()
+    : "Sem desconto (0%)";
+}

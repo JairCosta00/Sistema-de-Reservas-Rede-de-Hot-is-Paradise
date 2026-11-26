@@ -41,8 +41,10 @@ TelaDisponibilidade::TelaDisponibilidade(QWidget *parent)
         ui->btnRealizarReserva->setEnabled(false);
         ui->labelResultado->setText("O resultado da consulta aparecerá aqui.");
         ui->labelResultado->setStyleSheet(
-            "color:#64748B;background:#F1F5F9;border-radius:8px;padding:12px;");
+            "color: #E8E0D2; background-color: #20251F; "
+            "border: 1px solid #B49A70; border-radius: 9px; padding: 12px;");
     };
+
     connect(ui->comboHotel, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, limparConsulta);
     connect(ui->comboQuarto, QOverload<int>::of(&QComboBox::currentIndexChanged),
@@ -218,7 +220,6 @@ TelaDisponibilidade::TelaDisponibilidade(QWidget *parent)
         color: #0F172A;
         background: transparent;
         font-size: 13px;
-        font-family: "Segoe UI";
     }
 
     QPushButton {

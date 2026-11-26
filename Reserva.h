@@ -34,6 +34,7 @@ class Reserva
         void cancelar();
         bool estaCancelada() const { return cancelada; }
         bool estaPendente() const { return !statusReserva && !cancelada; }
+        string getDescricaoDesconto() const;
 
     // ------------------------ GETTERS AND SETTERS ------------------------
         Cliente getCliente() const;

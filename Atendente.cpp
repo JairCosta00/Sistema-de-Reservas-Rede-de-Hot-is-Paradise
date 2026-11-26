@@ -4,16 +4,6 @@
 
 using namespace std;
 
-string Atendente::getNome() const
-{
-    return nome;
-}
-
-void Atendente::setNome(string nome)
-{
-    this->nome = nome;
-}
-
 string Atendente::getSenha() const
 {
     return senha;
@@ -47,7 +37,7 @@ void Atendente::setAutenticado(bool autenticado)
 Atendente::Atendente() : autenticado(false) {}
 
 Atendente::Atendente(string nome, string login, string senha)
-    : nome(nome), login(login), senha(senha), autenticado(false) {}
+    : Pessoa(nome), login(login), senha(senha), autenticado(false) {}
 
 void Atendente::autenticar(string senhaDigitada)
 {
