@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     a.setWindowIcon(QIcon(ResourceDir + "AppIcon")); //HP_Logo_OffwhiteBackground
 
     bool autenticado = false;   // variavel de controle.
-    {   // garante que a tela de login é destuida após o login.
+    {   // garante que a tela de login é destuida após o login (economiza RAM)
         LoginDialog login;
         autenticado = (login.exec() == QDialog::Accepted);
     }

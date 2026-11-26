@@ -1,39 +1,43 @@
 #include <vector>
-#include <string.h>
 #include <fstream>
 #include <algorithm>
-#include <limits>
 #include "GerenciadorDeReservas.h"
 #include <QDate>
 #include <QString>
-#include <iostream>
 #include <stdexcept>
 #include <utility>
 #include <numeric>
+#include <string>
+#include <iostream>
+#include <memory>
+
+using namespace std;
 
 // Compara intervalos de hospedagem [check-in, check-out),
 // considerando o mesmo hotel e tipo de quarto.
 namespace {
+bool periodosConflitam(const std::string& checkInA, int diariasA,
+                       const std::string& checkInB, int diariasB)
+{
+    const QDate inicioA = QDate::fromString(QString::fromStdString(checkInA), "dd/MM/yyyy");
+    const QDate inicioB = QDate::fromString(QString::fromStdString(checkInB), "dd/MM/yyyy");
+
+    if (!inicioA.isValid() || !inicioB.isValid() || diariasA <= 0 || diariasB <= 0)
+        return false;
+
+    const QDate fimA = inicioA.addDays(diariasA);
+    const QDate fimB = inicioB.addDays(diariasB);
+    return inicioA < fimB && inicioB < fimA;
+}
+
 bool reservasConflitam(const Reserva& a, const Reserva& b)
 {
     if (a.getLocalidade() != b.getLocalidade() ||
         a.getQuarto().getTipoQuarto() != b.getQuarto().getTipoQuarto()) {
         return false;
     }
-
-    const QDate inicioA = QDate::fromString(
-        QString::fromStdString(a.getCheckIn()), "dd/MM/yyyy");
-    const QDate inicioB = QDate::fromString(
-        QString::fromStdString(b.getCheckIn()), "dd/MM/yyyy");
-
-    if (!inicioA.isValid() || !inicioB.isValid() ||
-        a.getNumeroDiarias() <= 0 || b.getNumeroDiarias() <= 0) {
-        return false;
-    }
-
-    const QDate fimA = inicioA.addDays(a.getNumeroDiarias());
-    const QDate fimB = inicioB.addDays(b.getNumeroDiarias());
-    return inicioA < fimB && inicioB < fimA;
+    return periodosConflitam(a.getCheckIn(), a.getNumeroDiarias(),
+                             b.getCheckIn(), b.getNumeroDiarias());
 }
 }
 
@@ -59,9 +63,8 @@ GerenciadorDeReservas::GerenciadorDeReservas()
 // Mantém compatibilidade tanto com o formato novo (com Desconto) quanto com arquivos antigos.
 void GerenciadorDeReservas::carregarDeArquivoTxt()
 {
-    // =========================================================================
-    // ETAPA 1: ABERTURA DO ARQUIVO E FUNÇÕES AUXILIARES DE TEXTO
-    // =========================================================================
+    // -------------------- ETAPA 1: ABERTURA DO ARQUIVO E FUNÇÕES AUXILIARES DE TEXTO --------------------
+
     std::ifstream arquivo("reservas_paradise.txt");
     if (!arquivo.is_open()) {
         return; // Primeira execução do sistema: ainda não existe histórico salvo.
@@ -86,41 +89,39 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
         return linha.substr(prefixo.size(), fim - prefixo.size());
     };
 
-    // =========================================================================
-    // ETAPA 2: ÂNCORAS (RÓTULOS) ESPERADAS EM CADA BLOCO DE RESERVA DO TXT
-    // =========================================================================
-    const std::string pData      = "Data Check-in: ";
-    const std::string pDiarias   = " | Diarias: ";
-    const std::string pHotel     = "Localidade: ";
-    const std::string pQuarto    = " | Quarto: ";
-    const std::string pCliente   = "Cliente: ";
-    const std::string pCpf       = " (CPF: ";
-    const std::string pAtendente = "Atendente: ";
-    const std::string pTotal     = "Total: R$ ";
-    const std::string pEntrada   = " | Entrada (1/3): R$ ";
-    const std::string pDesconto  = " | Desconto: "; // Novo campo adicionado
-    const std::string pStatus    = "Status: ";
+    // --------------------- RÓTULOS ESPERADAS EM CADA BLOCO DE RESERVA DO TXT -----------------------------
 
-    std::vector<Reserva> carregadas;
-    std::string linha;
+    const string pData      = "Data Check-in: ";
+    const string pDiarias   = " | Diarias: ";
+    const string pHotel     = "Localidade: ";
+    const string pQuarto    = " | Quarto: ";
+    const string pCliente   = "Cliente: ";
+    const string pCpf       = " (CPF: ";
+    const string pAtendente = "Atendente: ";
+    const string pTotal     = "Total: R$ ";
+    const string pEntrada   = " | Entrada (1/3): R$ ";
+    const string pDesconto  = " | Desconto: "; // Novo campo adicionado
+    const string pStatus    = "Status: ";
+
+    vector<Reserva> carregadas;
+    string linha;
     int ignoradas = 0;
 
+    // ---------------------- LEITURA SEQUENCIAL DOS BLOCOS DE 6 LINHAS POR RESERVA ----------------------
     // =========================================================================
-    // ETAPA 3: LEITURA SEQUENCIAL DOS BLOCOS DE 6 LINHAS POR RESERVA
-    // =========================================================================
-    while (std::getline(arquivo, linha)) {
+    while (getline(arquivo, linha)) {
         removerCR(linha);
 
         // Ignora cabeçalhos, linhas em branco e separadores "------" até achar uma reserva
         if (!comecaCom(linha, pData)) continue;
 
         // Lê as 5 linhas seguintes que compõem o registro completo daquela reserva
-        std::string linhaHotel, linhaCliente, linhaAtendente, linhaValores, linhaStatus;
-        if (!std::getline(arquivo, linhaHotel) ||
-            !std::getline(arquivo, linhaCliente) ||
-            !std::getline(arquivo, linhaAtendente) ||
-            !std::getline(arquivo, linhaValores) ||
-            !std::getline(arquivo, linhaStatus)) {
+       string linhaHotel, linhaCliente, linhaAtendente, linhaValores, linhaStatus;
+        if (!getline(arquivo, linhaHotel) ||
+            !getline(arquivo, linhaCliente) ||
+            !getline(arquivo, linhaAtendente) ||
+            !getline(arquivo, linhaValores) ||
+            !getline(arquivo, linhaStatus)) {
             ++ignoradas; // Arquivo terminou no meio de um bloco
             break;
         }
@@ -131,23 +132,21 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
         removerCR(linhaStatus);
 
         try {
-            // =================================================================
-            // ETAPA 4: EXTRAÇÃO E VALIDAÇÃO DOS CAMPOS BRUTOS
-            // =================================================================
-            std::string data   = entre(linha, pData, pDiarias);
-            std::string numero = linha.substr(linha.find(pDiarias) + pDiarias.size());
-            std::string hotel  = entre(linhaHotel, pHotel, pQuarto);
-            std::string tipo   = linhaHotel.substr(linhaHotel.find(pQuarto) + pQuarto.size());
+            // -------------------- EXTRAÇÃO E VALIDAÇÃO DOS CAMPOS BRUTOS --------------------
+            string data   = entre(linha, pData, pDiarias);
+            string numero = linha.substr(linha.find(pDiarias) + pDiarias.size());
+            string hotel  = entre(linhaHotel, pHotel, pQuarto);
+            string tipo   = linhaHotel.substr(linhaHotel.find(pQuarto) + pQuarto.size());
 
             const auto posCpf     = linhaCliente.rfind(pCpf);
             const auto posEntrada = linhaValores.find(pEntrada);
 
             // Garante que todos os prefixos obrigatórios e a data sejam válidos
             if (data.empty() || hotel.empty() || tipo.empty() ||
-                !comecaCom(linhaCliente, pCliente) || posCpf == std::string::npos ||
+                !comecaCom(linhaCliente, pCliente) || posCpf == string::npos ||
                 linhaCliente.back() != ')' ||
                 !comecaCom(linhaAtendente, pAtendente) ||
-                !comecaCom(linhaValores, pTotal) || posEntrada == std::string::npos ||
+                !comecaCom(linhaValores, pTotal) || posEntrada == string::npos ||
                 !comecaCom(linhaStatus, pStatus) ||
                 (linhaStatus != "Status: Pendente" &&
                  linhaStatus != "Status: Confirmada" &&
@@ -157,22 +156,22 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
                 continue;
             }
 
-            std::string nomeCliente = linhaCliente.substr(
+            string nomeCliente = linhaCliente.substr(
                 pCliente.size(), posCpf - pCliente.size());
-            std::string cpf = linhaCliente.substr(
+            string cpf = linhaCliente.substr(
                 posCpf + pCpf.size(),
                 linhaCliente.size() - (posCpf + pCpf.size()) - 1);
-            std::string nomeAtendente = linhaAtendente.substr(pAtendente.size());
+            string nomeAtendente = linhaAtendente.substr(pAtendente.size());
 
             // Converte números de diárias e valor total
-            int diarias = std::stoi(numero);
-            float total = std::stof(linhaValores.substr(
+            int diarias = stoi(numero);
+            float total = stof(linhaValores.substr(
                 pTotal.size(), posEntrada - pTotal.size()));
 
             // Extrai o valor da entrada e, se existir na linha, a descrição do desconto
             const auto posDesconto = linhaValores.find(pDesconto, posEntrada);
             float entrada = 0.0f;
-            std::string descStr = "Sem desconto (0%)";
+            string descStr = "Sem desconto (0%)";
 
             if (posDesconto != std::string::npos) {
                 // Formato novo: "Total: R$ X | Entrada (1/3): R$ Y | Desconto: Z"
@@ -193,9 +192,7 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
                 continue;
             }
 
-            // =================================================================
-            // ETAPA 5: RECONSTRUÇÃO DOS OBJETOS DE DOMÍNIO (OO + STRATEGY)
-            // =================================================================
+            // ------------------------- RECONSTRUÇÃO DOS OBJETOS DE DOMÍNIO (OO + STRATEGY) -------------------------
             // Busca o objeto Atendente correspondente na lista cadastrada
             Atendente responsavel(nomeAtendente, "", "");
             for (const auto& atendente : listaAtendentes) {
@@ -206,13 +203,13 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
             }
 
             // Instancia a estratégia de desconto correspondente ao texto salvo
-            std::shared_ptr<EstrategiaDesconto> estrategia = std::make_shared<SemDesconto>();
-            if (descStr.find("VIP") != std::string::npos) {
-                estrategia = std::make_shared<DescontoVIP>();
-            } else if (descStr.find("Baixa temporada") != std::string::npos) {
-                estrategia = std::make_shared<DescontoBaixaTemporada>();
-            } else if (descStr.find("Promocional") != std::string::npos) {
-                estrategia = std::make_shared<DescontoPromocional>();
+            shared_ptr<EstrategiaDesconto> estrategia = make_shared<SemDesconto>();
+            if (descStr.find("VIP") != string::npos) {
+                estrategia = make_shared<DescontoVIP>();
+            } else if (descStr.find("Baixa temporada") != string::npos) {
+                estrategia = make_shared<DescontoBaixaTemporada>();
+            } else if (descStr.find("Promocional") != string::npos) {
+                estrategia = make_shared<DescontoPromocional>();
             }
 
             // Monta a Reserva restaurando os valores exatos gravados (sem recalcular)
@@ -228,26 +225,19 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
 
             carregadas.push_back(std::move(reserva));
 
-        } catch (const std::exception&) {
+        } catch (const exception&) {
             // Protege a inicialização contra linhas corrompidas ou malformadas
             ++ignoradas;
         }
     }
 
-    // =========================================================================
-    // ETAPA 6: ATUALIZAÇÃO DO VETOR PRINCIPAL EM MEMÓRIA
-    // =========================================================================
+    // ------------------------------ ATUALIZAÇÃO DO VETOR PRINCIPAL EM MEMÓRIA ------------------------------
     listaReservas = std::move(carregadas);
-    std::cout << "Reservas carregadas: " << listaReservas.size() << '\n';
-    if (ignoradas > 0) {
-        std::cerr << "Atencao: " << ignoradas
-                  << " registro(s) incompleto(s) ignorado(s) no TXT.\n";
-    }
 }
 
 bool GerenciadorDeReservas::confirmarPagamentoReserva(
-    std::size_t indice, std::vector<std::string>* canceladas,
-    std::string* motivo)
+    size_t indice, vector<string>* canceladas,
+    string* motivo)
 {
     if (canceladas) canceladas->clear();
     if (motivo) motivo->clear();
@@ -265,9 +255,9 @@ bool GerenciadorDeReservas::confirmarPagamentoReserva(
         return false;
     }
 
-    // Se outro pagamento já confirmou a ocupação, não podemos aceitar
+    // Se outro pagamento já confirmou a ocupação, não pode aceitar
     // a mesma hospedagem: cancela-se a solicitação ainda não paga.
-    for (std::size_t i = 0; i < listaReservas.size(); ++i) {
+    for (size_t i = 0; i < listaReservas.size(); ++i) {
         if (i != indice && listaReservas[i].getStatusReserva() &&
             reservasConflitam(escolhida, listaReservas[i])) {
             escolhida.cancelar();
@@ -279,8 +269,7 @@ bool GerenciadorDeReservas::confirmarPagamentoReserva(
         }
     }
 
-    // O pagamento foi identificado: somente agora reserva efetivamente
-    // o quarto para o período solicitado.
+    // O pagamento identificado: reserva efetivamente o quarto para o período solicitado.
     escolhida.confirmarPagamento();
 
     // Outras solicitações não pagas que se sobrepõem perdem a vaga.
@@ -337,74 +326,28 @@ GerenciadorDeReservas* GerenciadorDeReservas::getInstancia()
 bool GerenciadorDeReservas::verificarDisponibilidade(
     string local, string dataCheckin, string tipoQuarto, int numeroDiarias)
 {
-    QDate inicioNovo = QDate::fromString(
-        QString::fromStdString(dataCheckin), "dd/MM/yyyy");
-    if (!inicioNovo.isValid() || numeroDiarias <= 0) return false;
-    QDate fimNovo = inicioNovo.addDays(numeroDiarias);
+    if (!QDate::fromString(QString::fromStdString(dataCheckin), "dd/MM/yyyy").isValid() ||
+        numeroDiarias <= 0) {
+        return false;
+    }
 
     for (const auto& r : listaReservas) {
-        if (!r.getStatusReserva()) continue; // Pendente/cancelada não ocupa.
-        if (r.getLocalidade() != local ||
-            r.getQuarto().getTipoQuarto() != tipoQuarto) continue;
-
-        QDate inicioExistente = QDate::fromString(
-            QString::fromStdString(r.getCheckIn()), "dd/MM/yyyy");
-        if (!inicioExistente.isValid()) continue;
-        QDate fimExistente = inicioExistente.addDays(
-            std::max(1, r.getNumeroDiarias()));
-
-        if (inicioNovo < fimExistente && fimNovo > inicioExistente)
-            return false;  // As hospedagens se sobrepõem.
+        if (r.getStatusReserva() &&
+            r.getLocalidade() == local &&
+            r.getQuarto().getTipoQuarto() == tipoQuarto &&
+            periodosConflitam(dataCheckin, numeroDiarias, r.getCheckIn(), r.getNumeroDiarias())) {
+            return false;
+        }
     }
     return true;
 }
 
-// 2. Adicionar nova reserva à memória
+// Adicionar nova reserva à memória
 void GerenciadorDeReservas::adicionarReserva(Reserva r) 
 {
     listaReservas.push_back(r);
 }
 
-// Mantida para compatibilidade com o menu de console antigo.
-void GerenciadorDeReservas::listarEConfirmarPendentes()
-{
-    cout << "\n--- SOLICITACOES PENDENTES ---" << endl;
-    bool encontrou = false;
-    for (std::size_t i = 0; i < listaReservas.size(); ++i) {
-        if (listaReservas[i].estaPendente()) {
-            cout << "[" << i << "] Cliente: "
-                 << listaReservas[i].getCliente().getNome()
-                 << " | Check-in: " << listaReservas[i].getCheckIn()
-                 << " | Entrada: R$ " << listaReservas[i].getValorEntrada()
-                 << endl;
-            encontrou = true;
-        }
-    }
-    if (!encontrou) {
-        cout << "Nao ha solicitacoes pendentes." << endl;
-        return;
-    }
-
-    int indice = -1;
-    cout << "Digite o indice da solicitacao paga (-1 para sair): ";
-    if (!(cin >> indice) || indice == -1) return;
-    if (indice < 0) {
-        cout << "Indice invalido." << endl;
-        return;
-    }
-
-    std::vector<std::string> canceladas;
-    std::string motivo;
-    if (!confirmarPagamentoReserva(
-            static_cast<std::size_t>(indice), &canceladas, &motivo)) {
-        cout << "Nao foi possivel confirmar: " << motivo << endl;
-        return;
-    }
-    cout << "Pagamento confirmado com sucesso." << endl;
-    for (const auto& cliente : canceladas) {
-        cout << "[Aviso] Solicitacao cancelada: " << cliente << endl;
-    }
-}
 //Encerrar Sessão
 void GerenciadorDeReservas::encerrarSessao()
 {
@@ -414,7 +357,7 @@ void GerenciadorDeReservas::encerrarSessao()
     }
 }
 
-// 3. Persistência em TXT; ordenação só na saída, sem modificar
+// Persistência em TXT; ordenação só na saída, sem modificar
 // o vetor de memória (os índices são usados pela tabela de pagamento).
 void GerenciadorDeReservas::salvarEmArquivoTxt()
 {
@@ -434,9 +377,9 @@ void GerenciadorDeReservas::salvarEmArquivoTxt()
         return dataA < dataB;
     });
 
-    std::ofstream arquivo("reservas_paradise.txt", std::ios::trunc);
+    ofstream arquivo("reservas_paradise.txt", ios::trunc);
     if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir reservas_paradise.txt para escrita." << endl;
+        cerr << "Erro ao abrir reservas_paradise.txt para escrita." << endl;
         return;
     }
 
@@ -461,7 +404,7 @@ void GerenciadorDeReservas::salvarEmArquivoTxt()
     }
     arquivo.close();
     if (!arquivo) {
-        std::cerr << "Falha ao gravar todas as reservas no TXT." << endl;
+        cerr << "Falha ao gravar todas as reservas no TXT." << endl;
     } else {
         cout << "Reservas salvas em reservas_paradise.txt" << endl;
     }
