@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
         );
 
     if (!logo.isNull()) {
-        // Ajusta a altura para 48px mantendo a proporção original para caber bem na barra superior
+        // Ajusta a altura para 54px mantendo a proporção original para caber bem na barra superior
         ui->labelMarca->setPixmap(
             logo.scaledToHeight(54, Qt::SmoothTransformation)
             );
@@ -54,9 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
             );
     }
 
-    // ========================================
-    // GERENCIAMENTO DAS TELAS
-    // ========================================
+    // ------------------ GERENCIAMENTO DAS TELAS ------------------
 
     // Guarda a tela principal existente
     QWidget* menuPrincipal = takeCentralWidget();

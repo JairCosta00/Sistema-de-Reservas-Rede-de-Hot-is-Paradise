@@ -73,7 +73,7 @@ void LoginDialog::on_pushButtonEntrar_clicked()
     const QString login = ui->lineEditLogin->text().trimmed();
     const QString senha = ui->lineEditSenha->text();
 
-    // Mostra um erro discreto abaixo do botão, sem janela modal
+    // Mostra um erro discreto abaixo do botão
     auto mostrarErro = [this](const QString& mensagem) {
         ui->labelMensagem->setStyleSheet(
             "QLabel#labelMensagem { color: #B42318; background: transparent; "
@@ -110,7 +110,6 @@ void LoginDialog::on_pushButtonEntrar_clicked()
         }
 
         // Limpa os campos antes de exibir a mensagem:
-        // textChanged oculta mensagens anteriores.
         ui->lineEditLogin->clear();
         ui->lineEditSenha->clear();
         ui->pushButtonEntrar->setEnabled(false);
