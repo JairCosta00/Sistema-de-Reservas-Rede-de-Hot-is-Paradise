@@ -63,7 +63,7 @@ GerenciadorDeReservas::GerenciadorDeReservas()
 // Mantém compatibilidade tanto com o formato novo (com Desconto) quanto com arquivos antigos.
 void GerenciadorDeReservas::carregarDeArquivoTxt()
 {
-    // -------------------- ETAPA 1: ABERTURA DO ARQUIVO E FUNÇÕES AUXILIARES DE TEXTO --------------------
+    // -------------------- ABERTURA DO ARQUIVO E FUNÇÕES AUXILIARES DE TEXTO --------------------
 
     std::ifstream arquivo("reservas_paradise.txt");
     if (!arquivo.is_open()) {
@@ -108,7 +108,7 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
     int ignoradas = 0;
 
     // ---------------------- LEITURA SEQUENCIAL DOS BLOCOS DE 6 LINHAS POR RESERVA ----------------------
-    // =========================================================================
+
     while (getline(arquivo, linha)) {
         removerCR(linha);
 
@@ -174,13 +174,12 @@ void GerenciadorDeReservas::carregarDeArquivoTxt()
             string descStr = "Sem desconto (0%)";
 
             if (posDesconto != std::string::npos) {
-                // Formato novo: "Total: R$ X | Entrada (1/3): R$ Y | Desconto: Z"
+                // Formato: "Total: R$ X | Entrada (1/3): R$ Y | Desconto: Z"
                 entrada = std::stof(linhaValores.substr(
                     posEntrada + pEntrada.size(),
                     posDesconto - (posEntrada + pEntrada.size())));
                 descStr = linhaValores.substr(posDesconto + pDesconto.size());
             } else {
-                // Retrocompatibilidade: arquivos antigos sem o campo "| Desconto: "
                 entrada = std::stof(linhaValores.substr(
                     posEntrada + pEntrada.size()));
             }
@@ -357,7 +356,7 @@ void GerenciadorDeReservas::encerrarSessao()
     }
 }
 
-// Persistência em TXT; ordenação só na saída, sem modificar
+// Persistência em TXT; ordenação na saída
 // o vetor de memória (os índices são usados pela tabela de pagamento).
 void GerenciadorDeReservas::salvarEmArquivoTxt()
 {
